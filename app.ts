@@ -1,11 +1,11 @@
-import express from 'express';
-import config from './utils/config';
+import express, { Request, Response } from 'express';
 
 const app = express();
 
-app.get('/', async (req, res) => {
-    res.json({ping: 'pong'})
-})
+app.get('/', async (req: Request, res: Response) => {
+    res.json({ ping: 'pong' });
+});
 
-module.exports = app;
+export default app;
+
 
