@@ -19,4 +19,6 @@ const sequelize = new Sequelize({
     password: process.env.DB_PASSWORD,
     port: 5432
 });
+
+export { sequelize, pool };
   
