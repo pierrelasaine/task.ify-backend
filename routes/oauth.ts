@@ -1,13 +1,17 @@
-import 
+import express from "express"
+import querystring from "querystring"
+import {Buffer} from 'buffer'
+import {client_secret} from "../utils/config"
+import utils from "../utils/utils"
 
-var client_id = 'd7527322ca104fe891303bb7837023e5';
-var redirect_uri = 'http://localhost:8888/callback';
+const client_id = 'd7527322ca104fe891303bb7837023e5';
+const redirect_uri = 'http://localhost:8888/callback';
 
-var app = express();
+const app = express();
 
-app.get('/login', function(req, res) {
+app.get('/login', function(req: any, res: string) {
 
-  var state = generateRandomString(16);
+  var state = utils.generateRandomString(16);
   var scope = 'user-read-private user-read-email';
 
   res.redirect('https://accounts.spotify.com/authorize?' +
@@ -19,3 +23,30 @@ app.get('/login', function(req, res) {
       state: state
     }));
 });
+
+app.get('/callback', function(req: string, res: string) {
+
+    var code = req.query.code || null;
+    var state = req.query.state || null;
+  
+    if (state === null) {
+      res.redirect('/#' +
+        querystring.stringify({
+          error: 'state_mismatch'
+        }));
+    } else {
+      var authOptions = {
+        url: 'https://accounts.spotify.com/api/token',
+        form: {
+          code: code,
+          redirect_uri: redirect_uri,
+          grant_type: 'authorization_code'
+        },
+        headers: {
+          'Authorization': 'Basic ' + ( Buffer.from(client_id + ':' + client_secret).toString('base64'))
+        },
+        json: true
+      };
+    }
+  });
+  
