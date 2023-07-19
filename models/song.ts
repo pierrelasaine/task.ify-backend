@@ -17,4 +17,4 @@ const Song = sequelize.define('Song', {
  },
 });
 
-module.exports = Song;
+export { Song };
