@@ -3,11 +3,11 @@ import querystring from "querystring"
 import {Buffer} from 'buffer'
 import config from "../utils/config"
 import utils from "../utils/utils"
-const redirect_uri = 'http://localhost:8888/callback';
+const redirect_uri = 'http://localhost:3001/oauth/callback';
 
-const app = express();
+const oAuthRoute = express();
 
-app.get('/login', function(req: Request, res: Response) {
+oAuthRoute.get('/login', function(req: Request, res: Response) {
 
   var state = utils.generateRandomString(16);
   var scope = 'user-read-private user-read-email';
@@ -22,7 +22,7 @@ app.get('/login', function(req: Request, res: Response) {
     }));
 });
 
-app.get('/callback', function(req: Request, res: Response) {
+oAuthRoute.get('/callback', function(req: Request, res: Response) {
 
     var code = req.query.code || null;
     var state = req.query.state || null;
@@ -48,3 +48,4 @@ app.get('/callback', function(req: Request, res: Response) {
     }
   });
   
+export default oAuthRoute;

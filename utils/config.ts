@@ -9,7 +9,7 @@ const client_id = "d7527322ca104fe891303bb7837023e5";
 const client_secret= "ba4545bd0ccc4014aa6419ea88421d94";
 
 const config = {
-    SERVER_PORT,
+    port: SERVER_PORT,
     client_id,
     client_secret
 }
