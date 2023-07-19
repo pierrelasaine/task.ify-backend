@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import { Pool } from 'pg';
+import { Pool, PoolClient } from 'pg';
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -10,15 +10,13 @@ const pool = new Pool({
   });
   
 
-const sequelize = new Sequelize({
+  const sequelize = new Sequelize({
     dialect: 'postgres',
-    dialectModule: require('pg'),
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    port: 5432
-});
+    dialectModule: {
+      create: () => pool.connect(),
+      destroy: (client: PoolClient) => client.release(),
+    },
+  });
 
 export { sequelize, pool };
   
