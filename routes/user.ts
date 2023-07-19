@@ -1,10 +1,8 @@
-import express, { Router } from 'express';
-import { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import  { User }  from '../models/user';
 import axios from 'axios';
 
-
-const router: Router = express.Router();
+const userRoute = express();
 
 interface SpotifyUserResponse {
     id: string;
@@ -12,8 +10,16 @@ interface SpotifyUserResponse {
     refresh_token: string;
 }
 
+// userRoute.get('/auth/token', (req, res) => {
+//     res.json(
+//        {
+//           access_token: access_token,
+//           refresh_token: refresh_token,
+//        })
+//   })
+
 //get user by spotify_id from User sequilize object in models/user.ts  
-router.get('/spotifyuser', async (req: Request, res: Response) => {
+userRoute.get('/spotifyuser', async (req: Request, res: Response) => {
     const accessToken = 'YOUR_SPOTIFY_ACCESS_TOKEN'; // Replace with the actual access token pulled from function in oauth
     const refreshToken = 'YOUR_SPOTIFY_REFRESH_TOKEN'; // Replace with the actual refresh token pulled from function in oauth
   
@@ -40,4 +46,4 @@ router.get('/spotifyuser', async (req: Request, res: Response) => {
     }
   });
 
-export default router;
+export default userRoute;

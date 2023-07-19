@@ -1,6 +1,6 @@
 import app from './app'
-import SERVER_PORT from './utils/config'
+import config from './utils/config'
 
-app.listen(SERVER_PORT, function () {
-    console.log(`🚀 Server running on http://localhost:${SERVER_PORT}`)
+app.listen(config.port, function () {
+    console.log(`🚀 Server running on http://localhost:${config.port}`)
   })
