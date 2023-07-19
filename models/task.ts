@@ -29,4 +29,4 @@ const Task = sequelize.define('Task', {
   },
 });
 
-module.exports = Task;
+export { Task };
