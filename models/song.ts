@@ -11,7 +11,7 @@ const Song = sequelize.define('Song', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  spotify_id: {
+  playlist_id: {
     type: DataTypes.STRING(255),
     allowNull: false,
  },

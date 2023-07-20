@@ -23,7 +23,7 @@ const Task = sequelize.define('Task', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  spotify_id: {
+  playlist_id: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },

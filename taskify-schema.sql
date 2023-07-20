@@ -11,7 +11,7 @@ CREATE TABLE task {
     timer INT NOT NULL,
     vibe VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
-    FOREIGN KEY (spotify_id) REFERENCES user(spotify_id)
+    FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id)
 };
 
 CREATE TABLE playlist {
@@ -23,5 +23,5 @@ CREATE TABLE playlist {
 CREATE TABLE song {
     song_id INT NOT NULL AUTO_INCREMENT,
     song_name VARCHAR(255) NOT NULL,
-    FOREIGN KEY (spotify_id) REFERENCES user(spotify_id)
+    FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id)
 };

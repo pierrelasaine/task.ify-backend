@@ -9,16 +9,7 @@ interface SpotifyUserResponse {
     access_token: string;
     refresh_token: string;
 }
-
-// userRoute.get('/auth/token', (req, res) => {
-//     res.json(
-//        {
-//           access_token: access_token,
-//           refresh_token: refresh_token,
-//        })
-//   })
-
-//get user by spotify_id from User sequilize object in models/user.ts  
+  
 userRoute.get('/spotifyuser', async (req: Request, res: Response) => {
     const accessToken = 'YOUR_SPOTIFY_ACCESS_TOKEN'; // Replace with the actual access token pulled from function in oauth
     const refreshToken = 'YOUR_SPOTIFY_REFRESH_TOKEN'; // Replace with the actual refresh token pulled from function in oauth
@@ -42,7 +33,7 @@ userRoute.get('/spotifyuser', async (req: Request, res: Response) => {
       res.status(200).json({ message: 'User information stored in the database' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Failed to fetch user information from Spotify API' });
+      res.status(500).json({ error: 'Failed to fetch user information from Spotify API /spotifyuser' });
     }
   });
 
