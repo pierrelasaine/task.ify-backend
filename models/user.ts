@@ -1,5 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
+import { Playlist } from './playlist';
+import { Task } from './task';
 
 const User = sequelize.define('User', {
   spotify_id: {
@@ -16,5 +18,8 @@ const User = sequelize.define('User', {
     allowNull: false,
   },
 });
+
+User.hasMany(Playlist, { foreignKey: 'spotify_id' });
+User.hasMany(Task, { foreignKey: 'spotify_id' });
 
 export { User };

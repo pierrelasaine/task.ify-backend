@@ -1,13 +1,21 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 
-const Song = sequelize.define('Song', {
-  song_id: {
+const Track = sequelize.define('Track', {
+  track_id: {
     type: DataTypes.STRING(255),
     allowNull: false,
     primaryKey: true,
   },
-  song_name: {
+  track_name: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  track_artist: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  track_uri: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
@@ -17,4 +25,5 @@ const Song = sequelize.define('Song', {
  },
 });
 
-export { Song };
+
+export { Track };

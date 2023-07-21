@@ -9,11 +9,11 @@ interface SpotifyUserResponse {
     access_token: string;
     refresh_token: string;
 }
-  
+
+
 userRoute.get('/spotifyuser', async (req: Request, res: Response) => {
-    const accessToken = 'YOUR_SPOTIFY_ACCESS_TOKEN'; // Replace with the actual access token pulled from function in oauth
-    const refreshToken = 'YOUR_SPOTIFY_REFRESH_TOKEN'; // Replace with the actual refresh token pulled from function in oauth
-  
+    const accessToken: string = req.cookies.userAuthToken; 
+    const refreshToken: string = req.cookies.userAuthRefreshToken;
     try {
       const response = await axios.get<SpotifyUserResponse>('https://api.spotify.com/v1/me', {
         headers: {
@@ -21,13 +21,13 @@ userRoute.get('/spotifyuser', async (req: Request, res: Response) => {
         },
       });
   
-      const { id, access_token, refresh_token } = response.data;
+      const { id, access_token } = response.data;
   
       // Create or update the user in the database
       await User.upsert({
         spotify_id: id,
-        access_token,
-        refresh_token,
+        access_token: access_token,
+        refresh_token: refreshToken,
       });
   
       res.status(200).json({ message: 'User information stored in the database' });

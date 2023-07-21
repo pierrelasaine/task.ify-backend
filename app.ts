@@ -4,6 +4,8 @@ import oAuthRoute from './routes/oauth'
 import cors from 'cors'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
+import gptRoute from './routes/chatgpt'
+import playlistRoute from './routes/playlist'
 
 const app = express()
 
@@ -18,7 +20,9 @@ app.use(
 )
 
 app.use('/oauth', oAuthRoute)
-app.use('/', userRoute)
+app.use('/spotifyuser', userRoute)
+app.use('/gpt', gptRoute)
+app.use('/playlist', playlistRoute)
 
 app.get('/', async (req: Request, res: Response) => {
     res.json({ ping: 'pong' })
