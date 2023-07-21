@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
+import { Playlist } from './playlist';
 
 const Task = sequelize.define('Task', {
   task_id: {
@@ -28,5 +29,7 @@ const Task = sequelize.define('Task', {
     allowNull: false,
   },
 });
+
+Task.belongsTo(Playlist, { foreignKey: 'playlist_id' });
 
 export { Task };

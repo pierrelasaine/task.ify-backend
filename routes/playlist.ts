@@ -1,42 +1,77 @@
-import express, {Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 import axios from 'axios';
-import config from '../utils/config';
 import { Playlist } from '../models/playlist';
-import { Song } from '../models/song';
-
+import { Track } from '../models/track';
+import userRoute from './user';
 
 const playlistRoute = express();
 
-playlistRoute.post('/create', async (req: Request, res: Response) => {
-    try {
-        const { playlistName, songs } = req.body;
-        
-        const spotifyApiResponse = await axios.post('https://api.spotify.com/v1/users/1216067691/playlists', {
+interface Track {
+  title: string;
+  artist: string;
+  uri: string;
+}
 
-        });
-    
-    const { playlist_name, playlistId, spotifyId, song} = spotifyApiResponse.data;   
+playlistRoute.post('/createplaylistspotify', async (req: Request, res: Response) => {
+  try {
 
+    const { playlistName, tracks } = req.body as { playlistName: string; tracks: Track[] };
+
+    const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
+    const { User } = spotifyUser.data;
+
+    // Make the request to Spotify API to create a new playlist
+    const spotifyApiResponse = await axios.post(
+      `https://api.spotify.com/v1/users/${User.spotify_id}/playlists`,
+      {
+        name: playlistName,
+        public: true,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${User.access_token}`,
+        },
+      }
+    );
+
+    const { name: playlist_name, id: playlistId, owner: { id: spotify_id } } = spotifyApiResponse.data;
+
+    // Create or update the playlist in the database
     await Playlist.upsert({
-        playlist_name: playlistName,
-        playlist_id: playlistId,
-        spotify_id: spotifyId,
+      playlist_name: playlist_name,
+      playlist_id: playlistId,
+      spotify_id: spotify_id,
     });
 
-    res.status(200).json({ message: 'Playlist information stored in the database' });
+    const songs = tracks.map(track => ({
+      track_name: track.title,
+      artist: track.artist,
+      uri: track.uri,
+      playlist_id: playlistId,
+    }));
 
-    await Song.upsert({
-        song_name: songName,
-        artist: artist,
-        album: album,
-        song_id: songId,
-        playlist_id: playlistId
-    });
+    // Insert songs into the database
+    await Track.bulkCreate(songs);
 
-    res.status(200).json({ message: 'Song information stored in the database' });
+    const uris = tracks.map(track => track.uri);
+    const addTracksToPlaylistResponse = await axios.post(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      {
+        uris: uris,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${User.access_token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to fetch playlist from Spotify API /create' });
-    }
+    res.status(200).json({ message: 'Playlist and Song information stored in the database' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch playlist from Spotify API /create' });
+  }
 });
+
+export default playlistRoute;

@@ -7,13 +7,14 @@ const gptRoute = express();
 
 gptRoute.post('/gptgenerateplaylist', async (req: Request, res: Response) => {
     try {
-        const { vibe, timer, taskName } = req.body;
+        const { vibe, timer, taskName, category } = req.body;
 
         const gptApiResponse = await axios.post('https://api.openai.com/v1/chat/completions', {
             model: 'gpt-3.5-turbo',
             messages: [
               { role: 'system', content: `You are a helpful assistant.` },
-              { role: 'user', content: `Generate a playlist with vibe: ${vibe}, time: ${timer}, and a playlist name: ${taskName}.` }
+              { role: 'user', content: `Generate a playlist with vibe: ${vibe}, exact minutes of duration: ${timer}, and give this the playlist name using the ${taskName} and ${vibe}. In the response include
+              nothing in the content with the exception of each song with the title, artist, and uri` }
             ]
           }, {
             headers: {
@@ -24,12 +25,13 @@ gptRoute.post('/gptgenerateplaylist', async (req: Request, res: Response) => {
 
         //Extract the playlist data from the GPT API response
         const playlistName = gptApiResponse.data.choices[0].message.content;
-        const songs = gptApiResponse.data.choices[0].message.songs;
+        const tracks = gptApiResponse.data.choices[0].message.songs;
 
-        await axios.post('/playlist/create', { playlistName, songs });
+        const playlistResponse = await axios.post('/playlist/createplaylistspotify', { playlistName, tracks });
+
+        const { playlistId } = playlistResponse.data;
 
         await Task.upsert({
-            task_id: taskId,
             task_name: taskName,
             timer: timer,
             vibe: vibe,
@@ -38,7 +40,7 @@ gptRoute.post('/gptgenerateplaylist', async (req: Request, res: Response) => {
         });
 
 
-        res.json({ playlistName, songs });
+        res.json({ playlistName, tracks });
 
     } catch (error) {
         console.error(error);
