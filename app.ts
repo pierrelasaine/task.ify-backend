@@ -21,8 +21,7 @@ app.use(
 
 app.use('/oauth', oAuthRoute)
 app.use('/spotifyuser', userRoute)
-app.use('/gpt', gptRoute)
-app.use('/playlist', playlistRoute)
+app.use('/gpt/gptgenerateplaylist', gptRoute)
 
 app.get('/', async (req: Request, res: Response) => {
     res.json({ ping: 'pong' })
