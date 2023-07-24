@@ -9,12 +9,11 @@ const playlistRoute = express();
 interface Track {
   title: string;
   artist: string;
-  uri: string;
+  uri: string; // Assuming you have a 'uri' property for each track
 }
 
 playlistRoute.post('/createplaylistspotify', async (req: Request, res: Response) => {
   try {
-
     const { playlistName, tracks } = req.body as { playlistName: string; tracks: Track[] };
 
     const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
@@ -43,21 +42,21 @@ playlistRoute.post('/createplaylistspotify', async (req: Request, res: Response)
       spotify_id: spotify_id,
     });
 
-    const songs = tracks.map(track => ({
-      track_name: track.title,
-      artist: track.artist,
-      uri: track.uri,
-      playlist_id: playlistId,
-    }));
-
     // Insert songs into the database
-    await Track.bulkCreate(songs);
+    for (const song of tracks) {
+      await Track.upsert({
+        track_name: song.title,
+        artist: song.artist,
+        uri: song.uri,
+        playlist_id: playlistId,
+      });
+    }
 
-    const uris = tracks.map(track => track.uri);
+    // Add tracks to the newly created playlist on Spotify
     const addTracksToPlaylistResponse = await axios.post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
-        uris: uris,
+        uris: tracks.map((track) => track.uri).join(','),
       },
       {
         headers: {
@@ -74,4 +73,22 @@ playlistRoute.post('/createplaylistspotify', async (req: Request, res: Response)
   }
 });
 
+
+//add the routes to play the playlist in it's entireity here (on front end this will be called when the start button of each task is clicked)
+playlistRoute.get('/playplaylistspotify', async (req: Request, res: Response) => {
+  try {
+    const { playlist_id } = req.body;
+    
+    const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
+    const { User } = spotifyUser.data;
+
+    //Make the request to Spotify API to play the playlist
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch playlist to stream from Spotify API /play' });
+  }
+});
+
+
 export default playlistRoute;
+

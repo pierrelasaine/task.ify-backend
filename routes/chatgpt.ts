@@ -14,7 +14,17 @@ gptRoute.post('/gptgenerateplaylist', async (req: Request, res: Response) => {
             messages: [
               { role: 'system', content: `You are a helpful assistant.` },
               { role: 'user', content: `Generate a playlist with vibe: ${vibe}, exact minutes of duration: ${timer}, and give this the playlist name using the ${taskName} and ${vibe}. In the response include
-              nothing in the content with the exception of each song with the title, artist, and uri` }
+              nothing in the content with the exception of each song with the title, artist, and uri and give the response in the form a json object like the following example:
+              {
+                "playlistName": "My Playlist",
+                "tracks": [
+                  {
+                    "title": "Song Title",
+                    "artist": "Artist Name",
+                    "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh"
+                  },
+              }
+              ` },  
             ]
           }, {
             headers: {
@@ -24,8 +34,8 @@ gptRoute.post('/gptgenerateplaylist', async (req: Request, res: Response) => {
           });
 
         //Extract the playlist data from the GPT API response
-        const playlistName = gptApiResponse.data.choices[0].message.content;
-        const tracks = gptApiResponse.data.choices[0].message.songs;
+        const playlistName = gptApiResponse.data.playlistName;
+        const tracks = gptApiResponse.data.tracks;
 
         const playlistResponse = await axios.post('/playlist/createplaylistspotify', { playlistName, tracks });
 
@@ -38,7 +48,6 @@ gptRoute.post('/gptgenerateplaylist', async (req: Request, res: Response) => {
             category: category,
             playlist_id: playlistId,
         });
-
 
         res.json({ playlistName, tracks });
 
