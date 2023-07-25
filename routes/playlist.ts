@@ -73,22 +73,5 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
   }
 });
 
-
-//add the routes to play the playlist in it's entireity here (on front end this will be called when the start button of each task is clicked)
-playlistRoute.get('/playplaylistspotify', async (req: Request, res: Response) => {
-  try {
-    const { playlist_id } = req.body;
-    
-    const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
-    const { User } = spotifyUser.data;
-
-    //Make the request to Spotify API to play the playlist
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to fetch playlist to stream from Spotify API /play' });
-  }
-});
-
-
 export default playlistRoute;
 
