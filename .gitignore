@@ -2,7 +2,7 @@
 **/node_modules
 .pnp
 .pnp.js
-
+.taskify-key-pair.pem
 
 # misc
 .DS_Store
