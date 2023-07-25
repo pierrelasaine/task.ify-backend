@@ -33,11 +33,11 @@ gptRoute.post('/generateplaylist', async (req: Request, res: Response) => {
           }
       });
 
-        // Extract the playlist data from the GPT API response
-        const playlistName = gptApiResponse.data.choices[0].message.playlistName;
-        console.log(playlistName);
+        //Extract the playlist data from the GPT API response
+        const gptMessageContent = JSON.parse(gptApiResponse.data.choices[0].message.content)
+        const playlistName = gptMessageContent.playlistName;
 
-        const tracks = gptApiResponse.data.choices[0].message.tracks;
+        const tracks = gptMessageContent.tracks;
         console.log(tracks);
 
 
