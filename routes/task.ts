@@ -7,7 +7,6 @@ import gptRoute from './chatgpt';
 
 const taskRoute = express();
 
-//CRUD
 
 taskRoute.get('/', async (req: Request, res: Response) => {
     try {
@@ -27,29 +26,6 @@ taskRoute.get('/tasks/:id', async (req: Request, res: Response) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to fetch task from database /tasks/:id' });
-    }
-});
-
-
-taskRoute.put('/tasks/:id', async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        const { task_name, timer, vibe, category, playlist_id } = req.body;
-        const task = await Task.findByPk(id);
-        if (task) {
-            task.task_name = task_name;
-            task.timer = timer;
-            task.vibe = vibe;
-            task.category = category;
-            task.playlist_id = playlist_id;
-            await task.save();
-            res.json(task);
-        } else {
-            res.status(404).json({ error: 'Task not found' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to update task in database /tasks/:id' });
     }
 });
 

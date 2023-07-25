@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import  { User }  from '../models/user';
 import axios from 'axios';
 
+
 const userRoute = express();
 
 interface SpotifyUserResponse {
@@ -11,7 +12,7 @@ interface SpotifyUserResponse {
 }
 
 
-userRoute.get('/spotifyuser', async (req: Request, res: Response) => {
+userRoute.get('/getuser', async (req: Request, res: Response) => {
     const accessToken: string = req.cookies.userAuthToken; 
     const refreshToken: string = req.cookies.userAuthRefreshToken;
     try {
