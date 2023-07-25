@@ -12,7 +12,7 @@ interface Track {
   uri: string; // Assuming you have a 'uri' property for each track
 }
 
-playlistRoute.post('/createplaylistspotify', async (req: Request, res: Response) => {
+playlistRoute.post('/callback', async (req: Request, res: Response) => {
   try {
     const { playlistName, tracks } = req.body as { playlistName: string; tracks: Track[] };
 

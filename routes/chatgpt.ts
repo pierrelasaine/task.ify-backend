@@ -5,7 +5,7 @@ import config from '../utils/config';
 
 const gptRoute = express();
 
-gptRoute.post('/gptgenerateplaylist', async (req: Request, res: Response) => {
+gptRoute.post('/generateplaylist', async (req: Request, res: Response) => {
     try {
         const { vibe, timer, taskName, category } = req.body;
 
@@ -37,7 +37,7 @@ gptRoute.post('/gptgenerateplaylist', async (req: Request, res: Response) => {
         const playlistName = gptApiResponse.data.playlistName;
         const tracks = gptApiResponse.data.tracks;
 
-        const playlistResponse = await axios.post('/playlist/createplaylistspotify', { playlistName, tracks });
+        const playlistResponse = await axios.post('/playlist/callback', { playlistName, tracks });
 
         const { playlistId } = playlistResponse.data;
 
