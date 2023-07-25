@@ -10,7 +10,9 @@ const taskRoute = express();
 
 taskRoute.get('/', async (req: Request, res: Response) => {
     try {
-        const tasks = await Task.findAll();
+        const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
+        const { User } = spotifyUser.data;
+        const tasks = await User.Task.findAll();
         res.json(tasks);
     } catch (error) {
         console.error(error);
@@ -20,8 +22,10 @@ taskRoute.get('/', async (req: Request, res: Response) => {
 
 taskRoute.get('/tasks/:id', async (req: Request, res: Response) => {
     try {
+        const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
+        const { User } = spotifyUser.data;
         const { id } = req.params;
-        const task = await Task.findByPk(id);
+        const task = await User.Task.findByPk(id);
         res.json(task);
     } catch (error) {
         console.error(error);
@@ -31,8 +35,10 @@ taskRoute.get('/tasks/:id', async (req: Request, res: Response) => {
 
 taskRoute.delete('/tasks/:id', async (req: Request, res: Response) => {
     try {
+        const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
+        const { User } = spotifyUser.data;
         const { id } = req.params;
-        const task = await Task.findByPk(id);
+        const task = await User.Task.findByPk(id);
         if (task) {
             await task.destroy();
             res.status(204).end();
@@ -47,8 +53,10 @@ taskRoute.delete('/tasks/:id', async (req: Request, res: Response) => {
 
 taskRoute.get('/tasks/:id/playlistcover', async (req: Request, res: Response) => {   
     try {
+        const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
+        const { User } = spotifyUser.data;
         const { id } = req.params;
-        const task = await Task.findByPk(id);
+        const task = await User.Task.findByPk(id);
 
         if (task) {
             const playlistCover = await axios.get('https://api.spotify.com/v1/playlists/${task.playlist_id}/images');
