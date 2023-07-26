@@ -39,7 +39,6 @@ gptRoute.post('/generateplaylist', async (req: Request, res: Response) => {
         const playlistName = gptMessageContent.playlistName;
         const tracks = gptMessageContent.tracks;
 
-
         const playlistResponse = await axios.post('/playlist/callback', { playlistName, tracks });
 
         const { playlistId } = playlistResponse.data.id;
@@ -52,7 +51,7 @@ gptRoute.post('/generateplaylist', async (req: Request, res: Response) => {
             playlist_id: playlistId,
         });
 
-        res.json({ playlistName, tracks });
+        res.json({ playlistId });
 
     } catch (error) {
         console.error(error);
