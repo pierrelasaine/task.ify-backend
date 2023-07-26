@@ -108,7 +108,7 @@ oAuthRoute.get('/callback', async (req: Request, res: Response) => {
             secure: true
         })
 
-        res.redirect('http://localhost:3000')
+        res.redirect('http://localhost:3000/dashboard')
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve token from Spotify' })
     }
@@ -125,9 +125,9 @@ oAuthRoute.get('/session-status', (req: Request, res: Response) => {
      *  @todo validate token? 
      */
     if (req.cookies && req.cookies.userAuthToken) {
-        res.json({ isAuthenticated: true })
+        res.json({ data: { isAuthenticated: true }})
     } else {
-        res.json({ isAuthenticated: false })
+        res.json({ data: {isAuthenticated: false }})
     }
 })
 

@@ -55,8 +55,9 @@ taskRoute.get('/tasks/:id/playlistcover', async (req: Request, res: Response) =>
     try {
         const spotifyUser = await axios.get(userRoute.get('/spotifyuser'));
         const { User } = spotifyUser.data;
+        const userSpotifyId = spotifyUser.data.id;
         const { id } = req.params;
-        const task = await User.Task.findByPk(id);
+        const task = await userSpotifyId.Task.findByPk(id);
 
         if (task) {
             const playlistCover = await axios.get('https://api.spotify.com/v1/playlists/${task.playlist_id}/images');
