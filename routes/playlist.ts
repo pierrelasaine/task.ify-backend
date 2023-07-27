@@ -12,43 +12,58 @@ interface Tracks {
   uri: string;
 }
 
+interface SpotifyUser {
+  spotify_id: string;
+  access_token: string;
+  refresh_token: string;
+}
+
+
 playlistRoute.post('/callback', async (req: Request, res: Response) => {
   try {
 
-    const { playlistName, tracks } = req.body as { playlistName: string; tracks: Tracks[] };
+    const { playlistName, tracks, accessToken } = req.body as { playlistName: string; tracks: Tracks[]; accessToken: string; };
 
+    // Get the user from the database
+    const spotifyUserInstance = await User.findOne({ where: { access_token: accessToken } });
+    if (!spotifyUserInstance) throw new Error('User not found with the given access token')
+    const spotifyUser = spotifyUserInstance.get()
 
+    const spotifyId: string = spotifyUser.spotify_id; 
 
+    console.log("playlist name", playlistName);
     // Make the request to Spotify API to create a new playlist
     const spotifyApiResponse = await axios.post(
-      `https://api.spotify.com/v1/users/${User.spotify_id}/playlists`,
+      `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
       {
         name: playlistName,
         public: true,
       },
       {
         headers: {
-          Authorization: `Bearer ${User.access_token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
+
+    const playlistId = spotifyApiResponse.data.id;
+    console.log("IN CALLBACK");
     
-    const { name: playlist_name, id: playlistId, owner: { id: spotify_id } } = spotifyApiResponse.data;
 
 
     // Create or update the playlist in the database
     await Playlist.upsert({
-      playlist_name: playlist_name,
+      playlist_name: playlistName,
       playlist_id: playlistId,
-      spotify_id: spotify_id,
+      spotify_id: spotifyId,
     });
 
     // Insert songs into the database
-    for (const song of tracks) {
+    for (const track of tracks) {
       await Track.upsert({
-        track_name: song.title,
-        artist: song.artist,
-        uri: song.uri,
+        track_name: track.title,
+        artist: track.artist,
+        uri: track.uri,
         playlist_id: playlistId,
       });
     }
@@ -62,15 +77,15 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${User.access_token}`,
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
       }
     );
 
-    res.status(200).json({ message: 'Playlist and Song information stored in the database' });
+    res.json({ playlistId, spotifyId });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ error: 'Failed to fetch playlist from Spotify API /create' });
   }
 });
