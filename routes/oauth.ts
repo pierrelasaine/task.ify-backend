@@ -129,9 +129,7 @@ oAuthRoute.get('/callback', async (req: Request, res: Response) => {
         // console.log("getSpotifyMe WOOOOOOOOOOOOO", getSpotifyMe.data.id);
         //my spotify id 31nnks5fdvcmf5g43dyhmw7lcubi
         const spotifyId = getSpotifyMe.data.id;
-        console.log("spotifyId:", spotifyId);
-        console.log("accessToken:", accessToken);
-        console.log("refreshToken:", refreshToken);
+
 
         // Create or update the user in the database
         await User.upsert({
