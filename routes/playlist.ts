@@ -18,13 +18,6 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
     const { playlistName, tracks } = req.body as { playlistName: string; tracks: Tracks[] };
 
 
-    // Get the user's access token and Spotify ID from the database
-
-    const spotifyUser = await axios.get(`http://localhost:3001/oauth/callback`);
-    const { User } = spotifyUser.data;
-    
-    
-    console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
 
     // Make the request to Spotify API to create a new playlist
     const spotifyApiResponse = await axios.post(

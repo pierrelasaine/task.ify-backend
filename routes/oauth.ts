@@ -5,6 +5,7 @@ import config from '../utils/config'
 import utils from '../utils/utils'
 import axios from 'axios'
 import { User } from '../models/user'
+import { token } from 'morgan'
 
 interface ISpotifyTokenResponse {
     access_token: string
@@ -155,7 +156,7 @@ oAuthRoute.get('/session-status', (req: Request, res: Response) => {
      *  @todo validate token? 
      */
     if (req.cookies && req.cookies.userAuthToken) {
-        res.json({ data: { isAuthenticated: true }})
+        res.json({ data: { isAuthenticated: true, token: req.cookies.userAuthToken }})
     } else {
         console.log('user is not authenticated')
         res.json({ data: { isAuthenticated: false }})
