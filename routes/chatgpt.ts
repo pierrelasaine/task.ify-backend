@@ -35,11 +35,11 @@ gptRoute.post('/generateplaylist', async (req: Request, res: Response) => {
 
         //Extract the playlist data from the GPT API response
         const gptMessageContent = JSON.parse(gptApiResponse.data.choices[0].message.content)
-        
+        //console.log("gptMessageContent", gptMessageContent);
         const playlistName = gptMessageContent.playlistName;
         const tracks = gptMessageContent.tracks;
 
-        const playlistResponse = await axios.post('/playlist/callback', { playlistName, tracks });
+        const playlistResponse = await axios.post('http://localhost:3001/playlist/callback', { playlistName, tracks });
 
         const { playlistId } = playlistResponse.data.id;
 

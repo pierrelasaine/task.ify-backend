@@ -1,43 +1,45 @@
 import express, { Request, Response } from 'express';
 import axios from 'axios';
 import { Playlist } from '../models/playlist';
-import userRoute from './user';
 import { Track } from '../models/track';
+import { User } from '../models/user';
 
 const playlistRoute = express();
 
 interface Tracks {
   title: string;
   artist: string;
-  uri: string; // Assuming you have a 'uri' property for each track
+  uri: string;
 }
 
 playlistRoute.post('/callback', async (req: Request, res: Response) => {
   try {
-    
-    console.log("HEREEEEEEE")
+
     const { playlistName, tracks } = req.body as { playlistName: string; tracks: Tracks[] };
 
-    const spotifyUser = await axios.get(`${userRoute}/spotifyuser`);
-  
-    const userAcessToken = spotifyUser.data.access_token;
-    const userSpotifyId = spotifyUser.data.id;
+
+    // Get the user's access token and Spotify ID from the database
+
+    const spotifyUser = await axios.get(`http://localhost:3001/oauth/callback`);
+    const { User } = spotifyUser.data;
+    
+    
+    console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
 
     // Make the request to Spotify API to create a new playlist
     const spotifyApiResponse = await axios.post(
-      `https://api.spotify.com/v1/users/${userSpotifyId}/playlists`,
+      `https://api.spotify.com/v1/users/${User.spotify_id}/playlists`,
       {
         name: playlistName,
         public: true,
       },
       {
         headers: {
-          Authorization: `Bearer ${userAcessToken}`,
+          Authorization: `Bearer ${User.access_token}`,
         },
       }
     );
     
-    console.log("spotify api response console log:", spotifyApiResponse.data)
     const { name: playlist_name, id: playlistId, owner: { id: spotify_id } } = spotifyApiResponse.data;
 
 
@@ -58,7 +60,7 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
       });
     }
 
-    console.log("track mapping in playlist route:", tracks.map((track) => track.uri).join(','))
+    //console.log("track mapping in playlist route:", tracks.map((track) => track.uri).join(','))
     // Add tracks to the newly created playlist on Spotify
     const addTracksToPlaylistResponse = await axios.post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
@@ -67,7 +69,7 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${userAcessToken}`,
+          Authorization: `Bearer ${User.access_token}`,
           'Content-Type': 'application/json',
         },
       }
