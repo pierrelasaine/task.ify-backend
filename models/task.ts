@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 import { Playlist } from './playlist';
 
-const Task = sequelize.define('Task', {
+const Task = sequelize.define('tasks', {
   task_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -28,6 +28,8 @@ const Task = sequelize.define('Task', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
+}, {
+  timestamps: false, 
 });
 
 Task.belongsTo(Playlist, { foreignKey: 'playlist_id' });

@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express'
-import userRoute from './routes/user'
 import oAuthRoute from './routes/oauth'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -21,7 +20,7 @@ app.use(
 )
 
 app.use('/oauth', oAuthRoute)
-app.use('/user', userRoute)
+// app.use('/user', userRoute)
 app.use('/gpt', gptRoute)
 app.use('/tasks', taskRoute)
 app.use('/playlist', playlistRoute)

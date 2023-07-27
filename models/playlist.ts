@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 import { Track } from './track';
 
-const Playlist = sequelize.define('Playlist', {
+const Playlist = sequelize.define('playlists', {
   playlist_id: {
     type: DataTypes.STRING(255),
     allowNull: false,
@@ -16,6 +16,8 @@ const Playlist = sequelize.define('Playlist', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
+}, {
+  timestamps: false, 
 });
 
 Playlist.hasMany(Track, { foreignKey: 'playlist_id' });

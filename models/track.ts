@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 
-const Track = sequelize.define('Track', {
+const Track = sequelize.define('tracks', {
   track_id: {
     type: DataTypes.STRING(255),
     allowNull: false,
@@ -23,6 +23,8 @@ const Track = sequelize.define('Track', {
     type: DataTypes.STRING(255),
     allowNull: false,
  },
+}, {
+  timestamps: false, 
 });
 
 
