@@ -2,67 +2,70 @@ import express, { Request, Response } from 'express';
 import  { User }  from '../models/user';
 import { Task } from '../models/task';  
 import axios from 'axios';
-import gptRoute from './chatgpt';
 
 const taskRoute = express();
 
 
-// taskRoute.get('/', async (req: Request, res: Response) => {
-//     try {
-//         const spotifyUser = 
-//         const { User } = spotifyUser.data;
-//         const tasks = await User.Task.findAll();
-//         res.json(tasks);
-//     } catch (error) {
-//         //console.error(error);
-//         res.status(500).json({ error: 'Failed to fetch tasks from database /tasks' });
-//     }
-// });
+taskRoute.get('/', async (req: Request, res: Response) => {
+    try {
+        const accessToken: string = req.body;
+        const spotifyUserInstance = await User.findOne({ where: { accessToken } });
+        if (!spotifyUserInstance) throw new Error('User not found with the given access token')
+         const spotifyUser = spotifyUserInstance.get()
 
-// taskRoute.get('/tasks/:id', async (req: Request, res: Response) => {
-//     try {
-//         const spotifyUser = await axios.get(`http://localhost:3001/user/getuser`);
-//         const { User } = spotifyUser.data.id;
-//         const { id } = req.params;
-//         const task = await User.Task.findByPk(id);
-//         res.json(task);
-//     } catch (error) {
-//         //console.error(error);
-//         res.status(500).json({ error: 'Failed to fetch task from database /tasks/:id' });
-//     }
-// });
+        const spotifyId: string = spotifyUser.spotify_id; 
 
-// taskRoute.delete('/tasks/:id', async (req: Request, res: Response) => {
-//     try {
-//         const spotifyUser = await axios.get(`http://localhost:3001/user/getuser`);
-//         const { User } = spotifyUser.data.id;
-//         const { id } = req.params;
-//         const task = await User.Task.findByPk(id);
-//         if (task) {
-//             await task.destroy();
-//             res.status(204).end();
-//         } else {
-//             res.status(404).json({ error: 'Task not found' });
-//         }
-//     } catch (error) {
-//         //console.error(error);
-//         res.status(500).json({ error: 'Failed to delete task in database /tasks/:id' });
-//     }
-// });
+        if (!spotifyUser) {
+            return res.status(404).json({ error: 'User not found with the given access token' });
+        }
+
+    
+        const tasks = await Task.findAll({ where: { spotify_id: spotifyId } });
+
+        res.json(tasks);
+    } catch (error) {
+        //console.error(error);
+        res.status(500).json({ error: 'Failed to fetch tasks from database /tasks' });
+    }
+});
+
+taskRoute.get('/tasks/:id', async (req: Request, res: Response) => {
+    try {
+        const { playlistId } = req.params;
+        const task = await Task.findOne({ where: { playlist_id: playlistId } });
+        res.json(task);
+    } catch (error) {
+        //console.error(error);
+        res.status(500).json({ error: 'Failed to fetch task from database /tasks/:id' });
+    }
+});
+
+taskRoute.delete('/tasks/:id', async (req: Request, res: Response) => {
+    try {
+        const { playlistId } = req.params;
+        const task = await Task.findOne({ where: { playlist_id: playlistId } });
+        if (task) {
+            await task.destroy();
+            res.status(204).end();
+        } else {
+            res.status(404).json({ error: 'Task not found' });
+        }
+    } catch (error) {
+        //console.error(error);
+        res.status(500).json({ error: 'Failed to delete task in database /tasks/:id' });
+    }
+});
 
 taskRoute.get('/tasks/:id/playlistcover', async (req: Request, res: Response) => {   
     try {
-        const spotifyUser = await axios.get(`http://localhost:3001/user/getuser`);
-        const { User } = spotifyUser.data;
-        const userSpotifyId = User.id;
-        const { id } = req.params;
-        const task = await userSpotifyId.Task.findByPk(id);
 
-        if (task) {
-            const playlistCover = await axios.get(`https://api.spotify.com/v1/playlists/${task.playlist_id}/images`);
+        const { playlistId } = req.params;
+        const task = await Task.findOne({ where: { playlist_id: playlistId } });
+        if(task) {
+            const playlistCover = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/images`);
             res.json(playlistCover);
         } else {
-            res.status(404).json({ error: 'Task not found' });
+            res.status(404).json({ error: 'Playlist not found' });
         }
     } catch (error) {
         //console.error(error);

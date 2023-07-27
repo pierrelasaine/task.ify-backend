@@ -20,7 +20,6 @@ app.use(
 )
 
 app.use('/oauth', oAuthRoute)
-// app.use('/user', userRoute)
 app.use('/gpt', gptRoute)
 app.use('/tasks', taskRoute)
 app.use('/playlist', playlistRoute)

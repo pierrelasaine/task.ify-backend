@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 import { Playlist } from './playlist';
+import { User } from './user';
 
 const Task = sequelize.define('tasks', {
   task_id: {
@@ -21,6 +22,10 @@ const Task = sequelize.define('tasks', {
     allowNull: false,
   },
   category: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  spotify_id: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
