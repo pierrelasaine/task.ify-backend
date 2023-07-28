@@ -21,9 +21,8 @@ CREATE TABLE tasks (
 );
 
 CREATE TABLE tracks (
-    track_id VARCHAR(255) PRIMARY KEY NOT NULL,
+    track_uri VARCHAR(255) PRIMARY KEY NOT NULL,
     track_name VARCHAR(255) NOT NULL,
     track_artist VARCHAR(255) NOT NULL,
-    track_uri VARCHAR(255) NOT NULL,
     playlist_id VARCHAR(255) REFERENCES playlists(playlist_id)
 );

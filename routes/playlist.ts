@@ -24,15 +24,12 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
 
     const { playlistName, tracks, accessToken } = req.body as { playlistName: string; tracks: Tracks[]; accessToken: string; };
 
-    // Get the user from the database
     const spotifyUserInstance = await User.findOne({ where: { access_token: accessToken } });
     if (!spotifyUserInstance) throw new Error('User not found with the given access token')
     const spotifyUser = spotifyUserInstance.get()
 
     const spotifyId: string = spotifyUser.spotify_id; 
 
-    console.log("playlist name", playlistName);
-    // Make the request to Spotify API to create a new playlist
     const spotifyApiResponse = await axios.post(
       `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
       {
@@ -47,33 +44,29 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
     );
 
     const playlistId = spotifyApiResponse.data.id;
-    console.log("IN CALLBACK");
-    
 
-
-    // Create or update the playlist in the database
     await Playlist.upsert({
       playlist_name: playlistName,
       playlist_id: playlistId,
       spotify_id: spotifyId,
     });
 
-    // Insert songs into the database
-    for (const track of tracks) {
-      await Track.upsert({
-        track_name: track.title,
-        artist: track.artist,
-        uri: track.uri,
-        playlist_id: playlistId,
-      });
-    }
+    
+    await Promise.all (
+      tracks.map((track) => {
+        Track.upsert({
+          track_name: track.title,
+          track_artist: track.artist,
+          track_uri: track.uri,
+          playlist_id: playlistId,
+        })
+      })
+      )
 
-    //console.log("track mapping in playlist route:", tracks.map((track) => track.uri).join(','))
-    // Add tracks to the newly created playlist on Spotify
     const addTracksToPlaylistResponse = await axios.post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
-        uris: tracks.map((track) => track.uri).join(','),
+        uris: tracks.map((track) => track.uri),
       },
       {
         headers: {

@@ -35,16 +35,16 @@ const oAuthRoute = express()
 
 oAuthRoute.get('/login', function (req: Request, res: Response) {
     var state = utils.generateRandomString(16)
-    var scope = 'user-read-private user-read-email'
+    var scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private'
 
     res.redirect(
         'https://accounts.spotify.com/authorize?' +
             querystring.stringify({
                 response_type: 'code',
                 client_id: config.client_id,
-                scope: scope,
                 redirect_uri: redirect_uri,
-                state: state
+                state: state,
+                scope: scope,
             })
     )
 })
@@ -101,8 +101,6 @@ oAuthRoute.get('/callback', async (req: Request, res: Response) => {
 
         const data: ISpotifyTokenResponse = await response.json()
 
-        
-
         res.cookie('userAuthToken', data.access_token, {
             maxAge: 900000,
             httpOnly: true,
@@ -116,8 +114,6 @@ oAuthRoute.get('/callback', async (req: Request, res: Response) => {
             secure: true
         })
 
-        //new stuff 
-
         const accessToken: string = data.access_token;
         const refreshToken: string = data.refresh_token;        
         
@@ -127,12 +123,8 @@ oAuthRoute.get('/callback', async (req: Request, res: Response) => {
             },
         });
 
-        // console.log("getSpotifyMe WOOOOOOOOOOOOO", getSpotifyMe.data.id);
-        //my spotify id 31nnks5fdvcmf5g43dyhmw7lcubi
         const spotifyId = getSpotifyMe.data.id;
 
-
-        // Create or update the user in the database
         await User.upsert({
             spotify_id: spotifyId,
             access_token: accessToken,
