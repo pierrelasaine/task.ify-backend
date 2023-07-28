@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 
 const Track = sequelize.define('tracks', {
-  track_id: {
+  track_uri: {
     type: DataTypes.STRING(255),
     allowNull: false,
     primaryKey: true,
@@ -15,10 +15,6 @@ const Track = sequelize.define('tracks', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  track_uri: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
   playlist_id: {
     type: DataTypes.STRING(255),
     allowNull: false,
@@ -26,6 +22,5 @@ const Track = sequelize.define('tracks', {
 }, {
   timestamps: false, 
 });
-
 
 export { Track };

@@ -18,13 +18,12 @@ taskRoute.get('/', async (req: Request, res: Response) => {
         if (!spotifyUser) {
             return res.status(404).json({ error: 'User not found with the given access token' });
         }
-
     
         const tasks = await Task.findAll({ where: { spotify_id: spotifyId } });
 
         res.json(tasks);
     } catch (error) {
-        //console.error(error);
+        console.error(error);
         res.status(500).json({ error: 'Failed to fetch tasks from database /tasks' });
     }
 });
@@ -35,7 +34,7 @@ taskRoute.get('/tasks/:id', async (req: Request, res: Response) => {
         const task = await Task.findOne({ where: { playlist_id: playlistId } });
         res.json(task);
     } catch (error) {
-        //console.error(error);
+        console.error(error);
         res.status(500).json({ error: 'Failed to fetch task from database /tasks/:id' });
     }
 });
@@ -51,7 +50,7 @@ taskRoute.delete('/tasks/:id', async (req: Request, res: Response) => {
             res.status(404).json({ error: 'Task not found' });
         }
     } catch (error) {
-        //console.error(error);
+        console.error(error);
         res.status(500).json({ error: 'Failed to delete task in database /tasks/:id' });
     }
 });
@@ -68,7 +67,7 @@ taskRoute.get('/tasks/:id/playlistcover', async (req: Request, res: Response) =>
             res.status(404).json({ error: 'Playlist not found' });
         }
     } catch (error) {
-        //console.error(error);
+        console.error(error);
         res.status(500).json({ error: 'Failed to fetch playlist cover from Spotify API /tasks/:id/playlistcover' });
     }
 });
