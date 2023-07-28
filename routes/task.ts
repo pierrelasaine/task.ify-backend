@@ -12,7 +12,6 @@ taskRoute.post("/", async (req: Request, res: Response) => {
     if (!spotifyUserInstance)
       throw new Error("User not found with the given access token");
     const spotifyUser = spotifyUserInstance.get();
-
     const spotifyId: string = spotifyUser.spotify_id;
 
     if (!spotifyUser) {
@@ -37,7 +36,7 @@ taskRoute.get("/:id", async (req: Request, res: Response) => {
   try {
     const playlistId  = req.params.id;
     const task = await Task.findOne({ where: { playlist_id: playlistId } });
-    res.json(task);
+    res.json({data: task});
   } catch (error) {
     console.error(error);
     res
@@ -72,7 +71,7 @@ taskRoute.get(
       const taskResponse = await Task.findOne({ where: { playlist_id: playlistId } });
       const task = taskResponse?.get({ plain: true });
       const accessToken = req.headers['authorization'];
-      console.log("ACCESS TOKEN: ", accessToken);
+ 
       if (task) {
         const playlistCoverResponse = await axios.get(
           `https://api.spotify.com/v1/playlists/${playlistId}/images`,
