@@ -1,84 +1,92 @@
-import express, { Request, Response } from 'express';
-import axios from 'axios';
-import { Playlist } from '../models/playlist';
-import userRoute from './user';
-import { Track } from '../models/track';
+import express, { Request, Response } from "express";
+import axios from "axios";
+import { Playlist } from "../models/playlist";
+import { Track } from "../models/track";
+import { User } from "../models/user";
 
 const playlistRoute = express();
 
 interface Tracks {
   title: string;
   artist: string;
-  uri: string; // Assuming you have a 'uri' property for each track
+  uri: string;
 }
 
-playlistRoute.post('/callback', async (req: Request, res: Response) => {
+interface SpotifyUser {
+  spotify_id: string;
+  access_token: string;
+  refresh_token: string;
+}
+
+playlistRoute.post("/callback", async (req: Request, res: Response) => {
   try {
-    
-    console.log("HEREEEEEEE")
-    const { playlistName, tracks } = req.body as { playlistName: string; tracks: Tracks[] };
+    const { playlistName, tracks, accessToken } = req.body as {
+      playlistName: string;
+      tracks: Tracks[];
+      accessToken: string;
+    };
 
-    const spotifyUser = await axios.get(`${userRoute}/spotifyuser`);
-  
-    const userAcessToken = spotifyUser.data.access_token;
-    const userSpotifyId = spotifyUser.data.id;
+    const spotifyUserInstance = await User.findOne({
+      where: { access_token: accessToken },
+    });
+    if (!spotifyUserInstance)
+      throw new Error("User not found with the given access token");
+    const spotifyUser = spotifyUserInstance.get();
 
-    // Make the request to Spotify API to create a new playlist
+    const spotifyId: string = spotifyUser.spotify_id;
+
     const spotifyApiResponse = await axios.post(
-      `https://api.spotify.com/v1/users/${userSpotifyId}/playlists`,
+      `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
       {
         name: playlistName,
         public: true,
       },
       {
         headers: {
-          Authorization: `Bearer ${userAcessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
-    
-    console.log("spotify api response console log:", spotifyApiResponse.data)
-    const { name: playlist_name, id: playlistId, owner: { id: spotify_id } } = spotifyApiResponse.data;
 
+    const playlistId = spotifyApiResponse.data.id;
 
-    // Create or update the playlist in the database
     await Playlist.upsert({
-      playlist_name: playlist_name,
+      playlist_name: playlistName,
       playlist_id: playlistId,
-      spotify_id: spotify_id,
+      spotify_id: spotifyId,
     });
 
-    // Insert songs into the database
-    for (const song of tracks) {
-      await Track.upsert({
-        track_name: song.title,
-        artist: song.artist,
-        uri: song.uri,
-        playlist_id: playlistId,
-      });
-    }
+    await Promise.all(
+      tracks.map((track) => {
+        Track.upsert({
+          track_name: track.title,
+          track_artist: track.artist,
+          track_uri: track.uri,
+          playlist_id: playlistId,
+        });
+      })
+    );
 
-    console.log("track mapping in playlist route:", tracks.map((track) => track.uri).join(','))
-    // Add tracks to the newly created playlist on Spotify
     const addTracksToPlaylistResponse = await axios.post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
-        uris: tracks.map((track) => track.uri).join(','),
+        uris: tracks.map((track) => track.uri),
       },
       {
         headers: {
-          Authorization: `Bearer ${userAcessToken}`,
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
         },
       }
     );
 
-    res.status(200).json({ message: 'Playlist and Song information stored in the database' });
+    res.json({ playlistId, spotifyId });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch playlist from Spotify API /create' });
+    res
+      .status(500)
+      .json({ error: "Failed to fetch playlist from Spotify API /create" });
   }
 });
 
 export default playlistRoute;
-

@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 
-const Track = sequelize.define('Track', {
-  track_id: {
+const Track = sequelize.define('tracks', {
+  track_uri: {
     type: DataTypes.STRING(255),
     allowNull: false,
     primaryKey: true,
@@ -15,15 +15,12 @@ const Track = sequelize.define('Track', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  track_uri: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
   playlist_id: {
     type: DataTypes.STRING(255),
     allowNull: false,
  },
+}, {
+  timestamps: false, 
 });
-
 
 export { Track };
