@@ -1,8 +1,8 @@
-import express, { Request, Response } from 'express';
-import axios from 'axios';
-import { Playlist } from '../models/playlist';
-import { Track } from '../models/track';
-import { User } from '../models/user';
+import express, { Request, Response } from "express";
+import axios from "axios";
+import { Playlist } from "../models/playlist";
+import { Track } from "../models/track";
+import { User } from "../models/user";
 
 const playlistRoute = express();
 
@@ -18,17 +18,22 @@ interface SpotifyUser {
   refresh_token: string;
 }
 
-
-playlistRoute.post('/callback', async (req: Request, res: Response) => {
+playlistRoute.post("/callback", async (req: Request, res: Response) => {
   try {
+    const { playlistName, tracks, accessToken } = req.body as {
+      playlistName: string;
+      tracks: Tracks[];
+      accessToken: string;
+    };
 
-    const { playlistName, tracks, accessToken } = req.body as { playlistName: string; tracks: Tracks[]; accessToken: string; };
+    const spotifyUserInstance = await User.findOne({
+      where: { access_token: accessToken },
+    });
+    if (!spotifyUserInstance)
+      throw new Error("User not found with the given access token");
+    const spotifyUser = spotifyUserInstance.get();
 
-    const spotifyUserInstance = await User.findOne({ where: { access_token: accessToken } });
-    if (!spotifyUserInstance) throw new Error('User not found with the given access token')
-    const spotifyUser = spotifyUserInstance.get()
-
-    const spotifyId: string = spotifyUser.spotify_id; 
+    const spotifyId: string = spotifyUser.spotify_id;
 
     const spotifyApiResponse = await axios.post(
       `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
@@ -51,17 +56,16 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
       spotify_id: spotifyId,
     });
 
-    
-    await Promise.all (
+    await Promise.all(
       tracks.map((track) => {
         Track.upsert({
           track_name: track.title,
           track_artist: track.artist,
           track_uri: track.uri,
           playlist_id: playlistId,
-        })
+        });
       })
-      )
+    );
 
     const addTracksToPlaylistResponse = await axios.post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
@@ -71,17 +75,18 @@ playlistRoute.post('/callback', async (req: Request, res: Response) => {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
 
     res.json({ playlistId, spotifyId });
   } catch (error) {
-    // console.error(error);
-    res.status(500).json({ error: 'Failed to fetch playlist from Spotify API /create' });
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: "Failed to fetch playlist from Spotify API /create" });
   }
 });
 
 export default playlistRoute;
-
