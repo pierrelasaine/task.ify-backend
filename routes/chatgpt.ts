@@ -18,7 +18,7 @@ gptRoute.post("/generateplaylist", async (req: Request, res: Response) => {
           { role: "system", content: `You are a helpful assistant.` },
           {
             role: "user",
-            content: `Generate a playlist with vibe: ${vibe}, exact minutes of duration: ${timer}, and dynamically give this the playlist name using the ${taskName} and ${vibe}. In the response return a json object of each song with the title, artist, and uri:
+            content: `Generate a playlist (only put songs from 2021 and earlier and no repeat songs in one playlist) with mood: ${vibe}, exact minutes of playlist duration: ${timer} times 2, and dynamically give this the playlist name using the ${taskName} and ${vibe}. In the response return a json object of each song with the title, artist, and a valid spotify uri (if there is no uri, generate a different song).:
               {
                   "playlistName": "My Playlist",
                   "tracks": [
@@ -39,13 +39,11 @@ gptRoute.post("/generateplaylist", async (req: Request, res: Response) => {
         },
       }
     );
-
     const gptMessageContent = JSON.parse(
       gptApiResponse.data.choices[0].message.content
     );
     const playlistName = gptMessageContent.playlistName;
     const tracks = gptMessageContent.tracks;
-
     const playlistResponse: {
       data: { playlistId: string; spotifyId: string };
     } = await axios.post("http://localhost:3001/playlist/callback", {

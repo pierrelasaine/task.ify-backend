@@ -150,7 +150,6 @@ oAuthRoute.get('/session-status', (req: Request, res: Response) => {
     if (req.cookies && req.cookies.userAuthToken) {
         res.json({ data: { isAuthenticated: true, token: req.cookies.userAuthToken }})
     } else {
-        console.log('user is not authenticated')
         res.json({ data: { isAuthenticated: false }})
     }
 })

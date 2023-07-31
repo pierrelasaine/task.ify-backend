@@ -12,7 +12,6 @@ taskRoute.post("/", async (req: Request, res: Response) => {
     if (!spotifyUserInstance)
       throw new Error("User not found with the given access token");
     const spotifyUser = spotifyUserInstance.get();
-
     const spotifyId: string = spotifyUser.spotify_id;
 
     if (!spotifyUser) {
@@ -33,11 +32,11 @@ taskRoute.post("/", async (req: Request, res: Response) => {
   }
 });
 
-taskRoute.get("/tasks/:id", async (req: Request, res: Response) => {
+taskRoute.get("/:id", async (req: Request, res: Response) => {
   try {
-    const { playlistId } = req.params;
+    const playlistId  = req.params.id;
     const task = await Task.findOne({ where: { playlist_id: playlistId } });
-    res.json(task);
+    res.json({data: task});
   } catch (error) {
     console.error(error);
     res
@@ -46,10 +45,9 @@ taskRoute.get("/tasks/:id", async (req: Request, res: Response) => {
   }
 });
 
-taskRoute.delete("/tasks/:id", async (req: Request, res: Response) => {
+taskRoute.delete("/delete/:id", async (req: Request, res: Response) => {
   try {
     const playlistId = req.params.id;
-    console.log("PLAYLIST ID FOR DELETE: ", playlistId);
     const task = await Task.findOne({ where: { playlist_id: playlistId } });
     if (task) {
       await task.destroy();
@@ -66,17 +64,25 @@ taskRoute.delete("/tasks/:id", async (req: Request, res: Response) => {
 });
 
 taskRoute.get(
-  "/tasks/:id/playlistcover",
+  "/:id/playlistcover",
   async (req: Request, res: Response) => {
     try {
-      const { playlistId } = req.params;
-      console.log("PLAYLIST ID FOR COVER: ", playlistId);
-      const task = await Task.findOne({ where: { playlist_id: playlistId } });
+      const playlistId  = req.params.id;
+      const taskResponse = await Task.findOne({ where: { playlist_id: playlistId } });
+      const task = taskResponse?.get({ plain: true });
+      const accessToken = req.headers['authorization'];
+ 
       if (task) {
-        const playlistCover = await axios.get(
-          `https://api.spotify.com/v1/playlists/${playlistId}/images`
+        const playlistCoverResponse = await axios.get(
+          `https://api.spotify.com/v1/playlists/${playlistId}/images`,
+          {
+            headers: {
+              Authorization: `${accessToken}`,
+            },
+        }
         );
-        console.log("PLAYLIST COVER: ", playlistCover);
+        const playlistCover = playlistCoverResponse.data[0];
+        
         res.json({data: playlistCover});
       } else {
         res.status(404).json({ error: "Playlist not found" });
