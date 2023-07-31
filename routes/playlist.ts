@@ -56,17 +56,6 @@ playlistRoute.post("/callback", async (req: Request, res: Response) => {
       spotify_id: spotifyId,
     });
 
-    await Promise.all(
-      tracks.map((track) => {
-        Track.upsert({
-          track_name: track.title,
-          track_artist: track.artist,
-          track_uri: track.uri,
-          playlist_id: playlistId,
-        });
-      })
-    );
-
     const addTracksToPlaylistResponse = await axios.post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
