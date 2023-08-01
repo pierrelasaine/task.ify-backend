@@ -3,6 +3,8 @@ import axios, { AxiosResponse } from "axios";
 import { Task } from "../models/task";
 import config from "../utils/config";
 
+const backend_base_url = config.backend_base_url;
+
 const gptRoute = express();
 
 gptRoute.post("/generateplaylist", async (req: Request, res: Response) => {
@@ -47,7 +49,7 @@ gptRoute.post("/generateplaylist", async (req: Request, res: Response) => {
     
     const playlistResponse: {
       data: { playlistId: string; spotifyId: string };
-    } = await axios.post("http://localhost:3001/playlist/callback", {
+    } = await axios.post(`${backend_base_url}/playlist/callback`, {
       playlistName,
       tracks,
       accessToken,
