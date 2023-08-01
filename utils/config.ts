@@ -10,13 +10,17 @@ const client_secret= process.env.CLIENT_SECRET
 
 const gpt_secretkey = process.env.GPT_SECRETKEY
 
+const DB_HOST = process.env.DB_HOST
 
+const backend_base_url = process.env.BACKEND_BASE_URL
 
 const config = {
     port: SERVER_PORT,
     client_id,
     client_secret,
-    gpt_secretkey
+    gpt_secretkey,
+    DB_HOST,
+    backend_base_url
 }
 
 export default config;
