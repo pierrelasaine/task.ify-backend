@@ -1,7 +1,7 @@
 CREATE TABLE users (
     spotify_id VARCHAR(255) PRIMARY KEY NOT NULL,
-    access_token VARCHAR(255) NOT NULL,
-    refresh_token VARCHAR(255) NOT NULL
+    access_token VARCHAR(400) NOT NULL,
+    refresh_token VARCHAR(400) NOT NULL
 );
 
 CREATE TABLE playlists (
@@ -17,12 +17,5 @@ CREATE TABLE tasks (
     vibe VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     spotify_id VARCHAR(255) REFERENCES users(spotify_id),
-    playlist_id VARCHAR(255) REFERENCES playlists(playlist_id)
-);
-
-CREATE TABLE tracks (
-    track_uri VARCHAR(255) PRIMARY KEY NOT NULL,
-    track_name VARCHAR(255) NOT NULL,
-    track_artist VARCHAR(255) NOT NULL,
     playlist_id VARCHAR(255) REFERENCES playlists(playlist_id)
 );

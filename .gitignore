@@ -2,7 +2,10 @@
 **/node_modules
 .pnp
 .pnp.js
-.taskify-key-pair.pem
+
+# testing
+/coverage
+
 
 # misc
 .DS_Store

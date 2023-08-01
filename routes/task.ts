@@ -9,17 +9,14 @@ taskRoute.post("/", async (req: Request, res: Response) => {
   try {
     const accessToken = req.body.token;
     const spotifyUserInstance = await User.findOne({ where: { access_token: accessToken } });
-    if (!spotifyUserInstance)
-      throw new Error("User not found with the given access token");
-    const spotifyUser = spotifyUserInstance.get();
-    const spotifyId: string = spotifyUser.spotify_id;
-
-    if (!spotifyUser) {
+    if (!spotifyUserInstance) {
       return res
         .status(404)
         .json({ error: "User not found with the given access token" });
     }
-
+    const spotifyUser = spotifyUserInstance.get();
+    const spotifyId: string = spotifyUser.spotify_id;
+    
     const taskResponse = await Task.findAll({ where: { spotify_id: spotifyId } });
     const tasks = taskResponse.map((task) => task.get({ plain: true }));
 
