@@ -79,8 +79,11 @@ taskRoute.get(
         }
         );
         const playlistCover = playlistCoverResponse.data[0];
-        
+        if (playlistCover) {
         res.json({data: playlistCover});
+        } else {
+          res.status(404).json({ error: "Playlist cover not found" });
+        }
       } else {
         res.status(404).json({ error: "Playlist not found" });
       }

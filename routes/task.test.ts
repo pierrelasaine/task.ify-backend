@@ -119,5 +119,27 @@ describe('Task Route Handler Tests', () => {
     });
 });
 
+it('should return 404 when no cover art is available for the given playlist on Spotify', async () => {
+  const playlistId = 'mock_playlist_id_no_cover';
+
+  jest.spyOn(Task, 'findOne').mockResolvedValue(Task.build({}));
+
+  mockedAxios.get.mockResolvedValue({ data: [] });
+
+  const response = await request(app).get(`/${playlistId}/playlistcover`).set('Authorization', 'mock_access_token');
+  
+  expect(response.status).toBe(404);
+  expect(response.body).toEqual({ 
+      error: "Playlist cover not found"
+  });
+
+  expect(Task.findOne).toHaveBeenCalledWith({ where: { playlist_id: playlistId } });
+
+  expect(mockedAxios.get).toHaveBeenCalledWith(`https://api.spotify.com/v1/playlists/${playlistId}/images`, {
+      headers: {
+          Authorization: 'mock_access_token',
+      },
+  });
+});
 
 });
