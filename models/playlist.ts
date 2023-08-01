@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
-import { Track } from './track';
 
 const Playlist = sequelize.define('playlists', {
   playlist_id: {
@@ -19,8 +18,5 @@ const Playlist = sequelize.define('playlists', {
 }, {
   timestamps: false, 
 });
-
-Playlist.hasMany(Track, { foreignKey: 'playlist_id' });
-Track.belongsTo(Playlist, { foreignKey: 'playlist_id' });
 
 export { Playlist };
