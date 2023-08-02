@@ -25,7 +25,8 @@
     "postgres": "^3.3.5",
     "run": "^1.4.0",
     "sequelize": "^6.32.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "nodemon": "^3.0.1"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
