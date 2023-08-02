@@ -6,6 +6,9 @@ import cookieParser from 'cookie-parser'
 import gptRoute from './routes/chatgpt'
 import playlistRoute from './routes/playlist'
 import taskRoute from './routes/task'
+import config from './utils/config'
+
+const frontend_base_url = config.frontend_base_url
 
 const app = express()
 
@@ -14,7 +17,7 @@ app.use(cookieParser())
 app.use(morgan('dev'))
 app.use(
     cors({
-        origin: 'http://localhost:3000',
+        origin: `${frontend_base_url}`,
         credentials: true
     })
 )

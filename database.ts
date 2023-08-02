@@ -8,10 +8,9 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASSWORD,
   port: 5432,
   dialectOptions: {
-    // SSL is required to connect to a Heroku Postgres database
     ssl: {
       require: true,
-      rejectUnauthorized: false, // required to handle self-signed certificate issue with Heroku Postgres
+      rejectUnauthorized: false, 
     }
   }
 });

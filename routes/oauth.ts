@@ -7,6 +7,9 @@ import axios from 'axios'
 import { User } from '../models/user'
 import { token } from 'morgan'
 
+const frontend_base_url = config.frontend_base_url;
+
+
 interface ISpotifyTokenResponse {
     access_token: string
     token_type: string
@@ -29,7 +32,7 @@ declare module 'express-session' {
     }
 }
 
-const redirect_uri = 'http://localhost:3001/oauth/callback'
+const redirect_uri = `${frontend_base_url}/oauth/callback`
 
 const oAuthRoute = express()
 
@@ -131,7 +134,7 @@ oAuthRoute.get('/callback', async (req: Request, res: Response) => {
             refresh_token: refreshToken,
         });
             
-        res.redirect('http://localhost:3000/dashboard')
+        res.redirect(`${frontend_base_url}/dashboard`)
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve token from Spotify' })
     }

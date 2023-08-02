@@ -14,13 +14,16 @@ const DB_HOST = process.env.DB_HOST
 
 const backend_base_url = process.env.BACKEND_BASE_URL
 
+const frontend_base_url = process.env.FRONTEND_BASE_URL
+
 const config = {
     port: PORT,
     client_id,
     client_secret,
     gpt_secretkey,
     DB_HOST,
-    backend_base_url
+    backend_base_url,
+    frontend_base_url
 }
 
 export default config;
