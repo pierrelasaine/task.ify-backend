@@ -19,24 +19,15 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Takeoff-Tec/task.ify-backend">
+    <img src="images/logo.png" alt="Logo" width="100" height="100">
   </a>
 
 <h3 align="center">Task.ify</h3>
 
   <p align="center">
-    project_description
+    Task.ify your new Task manager accompanoed by an ai generated playlist based on your task's vibe
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
-  </p>
 </div>
 
 
