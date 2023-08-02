@@ -8,6 +8,7 @@ import { User } from '../models/user'
 import { token } from 'morgan'
 
 const frontend_base_url = config.frontend_base_url;
+const backend_base_url = config.backend_base_url;
 
 
 interface ISpotifyTokenResponse {
@@ -32,7 +33,7 @@ declare module 'express-session' {
     }
 }
 
-const redirect_uri = `${frontend_base_url}/oauth/callback`
+const redirect_uri = `${backend_base_url}/oauth/callback`
 
 const oAuthRoute = express()
 
