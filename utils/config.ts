@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 dotenv.config();
 
 
-const SERVER_PORT = process.env.SERVER_PORT 
+const PORT = process.env.PORT || 3001
 
 const client_id = process.env.CLIENT_ID
 
@@ -15,7 +15,7 @@ const DB_HOST = process.env.DB_HOST
 const backend_base_url = process.env.BACKEND_BASE_URL
 
 const config = {
-    port: SERVER_PORT,
+    port: PORT,
     client_id,
     client_secret,
     gpt_secretkey,
