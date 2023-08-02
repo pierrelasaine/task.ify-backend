@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon --exec ts-node ./server.ts"
+    "build": "tsc",
+    "start": "node ./dist/server.js",
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
