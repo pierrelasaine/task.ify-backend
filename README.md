@@ -67,28 +67,24 @@
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ### Built With
 
 * [![Express.js](https://img.shields.io/badge/Express.js-4.18.2-blue)](https://expressjs.com/)
-* [![Sequelize](https://img.shields.io/badge/Sequelize-6.32.1-orange)](https://sequelize.org/)
-* [![Axios](https://img.shields.io/badge/Axios-0.21.1-blueviolet)](https://github.com/axios/axios)
-* [![dotenv](https://img.shields.io/badge/dotenv-16.3.1-brightgreen)](https://github.com/motdotla/dotenv)
-* [![cors](https://img.shields.io/badge/cors-2.8.5-brightgreen)](https://github.com/expressjs/cors)
-* [![cookie-parser](https://img.shields.io/badge/cookie--parser-1.4.6-yellow)](https://www.npmjs.com/package/cookie-parser)
+* [![typescript](https://img.shields.io/badge/typescript-4.5.4-blue)](https://www.typescriptlang.org/)
 * [![PostgreSQL](https://img.shields.io/badge/pg-8.11.1-blue)](https://www.postgresql.org/)
-* [![SQLite](https://img.shields.io/badge/sqlite3-5.1.6-lightgrey)](https://www.sqlite.org/)
-* [![nodemon](https://img.shields.io/badge/nodemon-3.0.1-red)](https://nodemon.io/)
+* [![Sequelize](https://img.shields.io/badge/Sequelize-6.32.1-orange)](https://sequelize.org/)
 * [![Jest](https://img.shields.io/badge/Jest-29.6.1-critical)](https://jestjs.io/)
 * [![supertest](https://img.shields.io/badge/supertest-6.3.3-blue)](https://github.com/visionmedia/supertest)
-* [![typescript](https://img.shields.io/badge/typescript-4.5.4-blue)](https://www.typescriptlang.org/)
 * [![ts-jest](https://img.shields.io/badge/ts--jest-29.1.1-blue)](https://github.com/kulshekhar/ts-jest)
 * [![sequelize-mock](https://img.shields.io/badge/sequelize--mock-0.10.2-brightgreen)](https://github.com/BlinkUX/sequelize-mock)
 * [![jest-mock-axios](https://img.shields.io/badge/jest--mock--axios-4.7.2-brightgreen)](https://github.com/knee-cola/jest-mock-axios)
-
+* [![Axios](https://img.shields.io/badge/Axios-0.21.1-blueviolet)](https://github.com/axios/axios)
+* [![nodemon](https://img.shields.io/badge/nodemon-3.0.1-red)](https://nodemon.io/)
+* [![dotenv](https://img.shields.io/badge/dotenv-16.3.1-brightgreen)](https://github.com/motdotla/dotenv)
+* [![cors](https://img.shields.io/badge/cors-2.8.5-brightgreen)](https://github.com/expressjs/cors)
+* [![SQLite](https://img.shields.io/badge/sqlite3-5.1.6-lightgrey)](https://www.sqlite.org/)
 
 
 
@@ -109,18 +105,21 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Get a OpenAI API Key at [https://platform.openai.com/docs/api-reference/introduction)
+2. Get a Spotify API Key at [https://developer.spotify.com/documentation/web-api)
+3. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/Takeoff-Tec/task.ify-backend
    ```
-3. Install NPM packages
+4. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+5. Create and Enter your Open AI API KEY and Spotify Client Secret/ID in `.env`
+   ```
+   GPT_SECRETKEY = 'ENTER YOUR API';
+   CLIENT_ID = 'ENTER YOUR API';
+   CLIENT_SECET = 'ENTER YOUR API';
    ```
 
 
@@ -170,8 +169,6 @@ Don't forget to give the project a star! Thanks again!
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
