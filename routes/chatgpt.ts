@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { Task } from "../models/task";
 import config from "../utils/config";
 

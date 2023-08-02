@@ -5,33 +5,10 @@ import config from '../utils/config'
 import utils from '../utils/utils'
 import axios from 'axios'
 import { User } from '../models/user'
-import { token } from 'morgan'
+import SpotifyTokenResponse from '../interfaces/SpotifyTokenResponse'
 
 const frontend_base_url = config.frontend_base_url;
 const backend_base_url = config.backend_base_url;
-
-
-interface ISpotifyTokenResponse {
-    access_token: string
-    token_type: string
-    scope: string
-    expires_in: number
-    refresh_token: string
-}
-
-
-interface SpotifyUserResponse {
-    id: string;
-    access_token: string;
-    refresh_token: string;
-}
-
-declare module 'express-session' {
-    interface SessionData {
-        accessToken?: string
-        refreshToken?: string
-    }
-}
 
 const redirect_uri = `${backend_base_url}/oauth/callback`
 
@@ -103,7 +80,7 @@ oAuthRoute.get('/callback', async (req: Request, res: Response) => {
             return res.status(response.status).json(errorData)
         }
 
-        const data: ISpotifyTokenResponse = await response.json()
+        const data: SpotifyTokenResponse = await response.json()
 
         res.cookie('userAuthToken', data.access_token, {
             maxAge: 900000,

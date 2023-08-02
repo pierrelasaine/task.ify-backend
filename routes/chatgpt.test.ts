@@ -1,4 +1,4 @@
-import express, { Request, Response, response } from 'express';
+import express from 'express';
 import request from 'supertest';
 import axios from 'axios';
 import { Task } from '../models/task';
