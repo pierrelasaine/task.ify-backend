@@ -1,5 +1,5 @@
 const session = require('express-session')
-const ConnectRedis = require('connect-redis')
+const ConnectRedis = require('connect-redis')(session)
 
 type myRedisClient = any
 
