@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import oAuthRoute from './routes/oauth'
+import oAuthRoute from './routes/oauth/oauth'
 import cors from 'cors'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'

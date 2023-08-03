@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 import { Playlist } from './playlist';
-import { User } from './user';
 
 const Task = sequelize.define('tasks', {
   task_id: {
