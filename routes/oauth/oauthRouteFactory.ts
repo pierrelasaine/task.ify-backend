@@ -167,6 +167,7 @@ const createOAuthRoute = (
 
     oAuthRoute.get('/session-status', (req: Request, res: Response) => {
         try {
+            console.log('Session State:', req.session)
             if (req.session && req.session.accessToken) {
                 console.log('Logged in')
                 res.json({
