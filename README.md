@@ -4,7 +4,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 
 
@@ -162,11 +162,14 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Pierre Johnson - [@linkedin handle](https://www.linkedin.com/in/pierrelasaine) - pierrelasaine@gmail.com \n
-Camila Naranjo - [@linkedin_handle](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com \n
-Maria Fernanda Palacios Martinez - [@linkedin_handle](https://twitter.com/twitter_handle) - email@email_client.com \n
+Pierre Johnson - [@linkedin handle][linkedin-shield](https://www.linkedin.com/in/pierrelasaine) - pierrelasaine@gmail.com 
 
-Backend Project Link: [https://github.com/Takeoff-Tec/task.ify-backend](https://github.com/Takeoff-Tec/task.ify-backend) \n
+Camila Naranjo - [@linkedin_handle][linkedin-shield](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com 
+
+Maria Fernanda Palacios Martinez - [@linkedin_handle][linkedin-shield](https://twitter.com/twitter_handle) - email@email_client.com 
+
+Backend Project Link: [https://github.com/Takeoff-Tec/task.ify-backend](https://github.com/Takeoff-Tec/task.ify-backend) 
+
 Frontend Project Link: [https://github.com/Takeoff-Tec/task.ify-frontend](https://github.com/Takeoff-Tec/task.ify-frontend)
 
 
@@ -175,9 +178,9 @@ Frontend Project Link: [https://github.com/Takeoff-Tec/task.ify-frontend](https:
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [A'shuan Thomas](https://github.com/lasagnamassage)
+* [Sammy Au]()
+* [Paige Godfrey](https://github.com/paigegodfrey)
 
 
 
@@ -195,5 +198,5 @@ Frontend Project Link: [https://github.com/Takeoff-Tec/task.ify-frontend](https:
 [license-shield]: https://img.shields.io/github/license/Takeoff-Tec/task.ify-backend.svg?style=for-the-badge
 [license-url]: https://github.com/Takeoff-Tec/task.ify-backend/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+
 [product-screenshot]: images/screenshot.png
