@@ -162,11 +162,11 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Pierre Johnson - [@linkedin handle][linkedin-shield](https://www.linkedin.com/in/pierrelasaine) - pierrelasaine@gmail.com 
+Pierre Johnson - [linkedin-shield](https://www.linkedin.com/in/pierrelasaine) - pierrelasaine@gmail.com 
 
-Camila Naranjo - [@linkedin_handle][linkedin-shield](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com 
+Camila Naranjo - [linkedin-shield](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com 
 
-Maria Fernanda Palacios Martinez - [@linkedin_handle][linkedin-shield](https://twitter.com/twitter_handle) - email@email_client.com 
+Maria Fernanda Palacios Martinez - [linkedin-shield](https://twitter.com/twitter_handle) - email@email_client.com 
 
 Backend Project Link: [https://github.com/Takeoff-Tec/task.ify-backend](https://github.com/Takeoff-Tec/task.ify-backend) 
 
@@ -181,6 +181,10 @@ Frontend Project Link: [https://github.com/Takeoff-Tec/task.ify-frontend](https:
 * [A'shuan Thomas](https://github.com/lasagnamassage)
 * [Sammy Au]()
 * [Paige Godfrey](https://github.com/paigegodfrey)
+* Nilesh Patel (Salesforce Mentor)
+* Samuel Paramar (Salesforce Mentor)
+* Ryan Warnock (Salesforce Mentor)
+* Salesforce FTL Cohort 2023
 
 
 
