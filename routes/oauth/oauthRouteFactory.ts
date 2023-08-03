@@ -46,8 +46,7 @@ const createOAuthRoute = (
             sameSite: 'none',
             secure: true
         }
-    });
-    
+    })
 
     oAuthRoute.use(sessionMiddleware)
 
@@ -58,7 +57,6 @@ const createOAuthRoute = (
                 'user-read-private user-read-email playlist-modify-public playlist-modify-private'
 
             req.session.state = state
-            console.log('Session:', req.session)
 
             res.redirect(
                 'https://accounts.spotify.com/authorize?' +
@@ -88,8 +86,6 @@ const createOAuthRoute = (
             if (state !== req.session.state) {
                 throw new Error('State mismatch.')
             }
-
-            console.log('Callback Session:', req.session)
 
             const authOptions = {
                 method: 'post',
@@ -121,6 +117,13 @@ const createOAuthRoute = (
                 data
             req.session.accessToken = accessToken
 
+            res.cookie('accessToken', accessToken, {
+                httpOnly: true,
+                sameSite: 'none',
+                secure: true,
+                maxAge: 3600000
+            })
+
             const getSpotifyMe = await axiosInstance.get(
                 'https://api.spotify.com/v1/me',
                 {
@@ -137,8 +140,6 @@ const createOAuthRoute = (
                 access_token: accessToken,
                 refresh_token: refreshToken
             })
-
-            console.log('Rediredcting to Dashboard...')
 
             res.redirect(`${frontend_base_url}/dashboard`)
         } catch (error: any) {
@@ -161,7 +162,6 @@ const createOAuthRoute = (
                 if (err) {
                     throw err
                 }
-                console.log('Logged out')
                 res.status(204).send()
             })
         } catch (error: any) {
@@ -172,17 +172,14 @@ const createOAuthRoute = (
 
     oAuthRoute.get('/session-status', (req: Request, res: Response) => {
         try {
-            console.log('Session State:', req.session)
-            if (req.session && req.session.accessToken) {
-                console.log('Logged in')
+            if (req.cookies && req.cookies.accessToken) {
                 res.json({
                     data: {
                         isAuthenticated: true,
-                        token: req.session.accessToken
+                        token: req.cookies.accessToken
                     }
                 })
             } else {
-                console.log('Not logged in')
                 res.json({ data: { isAuthenticated: false } })
             }
         } catch (error: any) {
