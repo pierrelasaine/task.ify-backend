@@ -53,6 +53,7 @@ const createOAuthRoute = (
                 'user-read-private user-read-email playlist-modify-public playlist-modify-private'
 
             req.session.state = state
+            console.log('Session:', req.session)
 
             res.redirect(
                 'https://accounts.spotify.com/authorize?' +
@@ -82,6 +83,8 @@ const createOAuthRoute = (
             if (state !== req.session.state) {
                 throw new Error('State mismatch.')
             }
+
+            console.log('Callback Session:', req.session)
 
             const authOptions = {
                 method: 'post',
