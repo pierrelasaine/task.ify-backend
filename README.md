@@ -162,11 +162,11 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Pierre Johnson - [@linkedin handle](https://www.linkedin.com/in/pierrelasaine) - pierrelasaine@gmail.com
-Camila Naranjo - [@linkedin_handle](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com
-Maria Fernanda Palacios Martinez - [@linkedin_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Pierre Johnson - [@linkedin handle](https://www.linkedin.com/in/pierrelasaine) - pierrelasaine@gmail.com \n
+Camila Naranjo - [@linkedin_handle](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com \n
+Maria Fernanda Palacios Martinez - [@linkedin_handle](https://twitter.com/twitter_handle) - email@email_client.com \n
 
-Backend Project Link: [https://github.com/Takeoff-Tec/task.ify-backend](https://github.com/Takeoff-Tec/task.ify-backend)
+Backend Project Link: [https://github.com/Takeoff-Tec/task.ify-backend](https://github.com/Takeoff-Tec/task.ify-backend) \n
 Frontend Project Link: [https://github.com/Takeoff-Tec/task.ify-frontend](https://github.com/Takeoff-Tec/task.ify-frontend)
 
 
