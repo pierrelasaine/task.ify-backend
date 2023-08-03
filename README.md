@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
-    <img src="https://i.imgur.com/rMdsZcE.png" alt="Logo" width="300" height="300">
+    <img src="https://i.imgur.com/rMdsZcE.png" alt="Logo" width="600" height="400">
   </a>
 
   <p align="center">
