@@ -158,12 +158,8 @@ const createOAuthRoute = (
 
     oAuthRoute.get('/logout', (req: Request, res: Response) => {
         try {
-            req.session.destroy(err => {
-                if (err) {
-                    throw err
-                }
-                res.status(204).send()
-            })
+            res.clearCookie('accessToken')
+            res.status(204).send()
         } catch (error: any) {
             console.error('Error during logout:', error.message)
             res.status(500).json({ error: 'Failed to logout' })
