@@ -1,5 +1,5 @@
-import session from 'express-session'
-import ConnectRedis from 'connect-redis'
+const session = require('express-session')
+const ConnectRedis = require('connect-redis')
 
 type myRedisClient = any
 
