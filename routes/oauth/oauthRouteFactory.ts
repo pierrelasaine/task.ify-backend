@@ -133,6 +133,8 @@ const createOAuthRoute = (
                 refresh_token: refreshToken
             })
 
+            console.log('Rediredcting to Dashboard...')
+
             res.redirect(`${frontend_base_url}/dashboard`)
         } catch (error: any) {
             if (error.response) {
@@ -154,6 +156,7 @@ const createOAuthRoute = (
                 if (err) {
                     throw err
                 }
+                console.log('Logged out')
                 res.status(204).send()
             })
         } catch (error: any) {
@@ -165,6 +168,7 @@ const createOAuthRoute = (
     oAuthRoute.get('/session-status', (req: Request, res: Response) => {
         try {
             if (req.session && req.session.accessToken) {
+                console.log('Logged in')
                 res.json({
                     data: {
                         isAuthenticated: true,
@@ -172,6 +176,7 @@ const createOAuthRoute = (
                     }
                 })
             } else {
+                console.log('Not logged in')
                 res.json({ data: { isAuthenticated: false } })
             }
         } catch (error: any) {
