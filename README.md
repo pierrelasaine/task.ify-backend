@@ -57,7 +57,7 @@
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
-
+Take a Look @ https://taskify-frontendhost-2277661894f3.herokuapp.com/
 
 ### Built With
 
@@ -125,10 +125,10 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] OpenAI API Generated Playlist Name and Tracks
-- [ ] Creation of Playlist with Tracks inserted in Spotify API
-- [ ] Task CRUD operations
-    - [ ] Retrieves Spotify Cover
+- [x] OpenAI API Generated Playlist Name and Tracks
+- [x] Creation of Playlist with Tracks inserted in Spotify API
+- [x] Task CRUD operations
+    - [x] Retrieves Spotify Cover
 
 See the [open issues](https://github.com/Takeoff-Tec/task.ify-backend/issues) for a full list of proposed features (and known issues).
 
@@ -162,15 +162,19 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Pierre Johnson - [linkedin-shield](https://www.linkedin.com/in/pierrelasaine) - pierrelasaine@gmail.com 
+Pierre Johnson - [linkedin](https://www.linkedin.com/in/pierrelasaine) - pierrelasaine@gmail.com 
 
-Camila Naranjo - [linkedin-shield](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com 
+Camila Naranjo - [linkedin](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com 
 
-Maria Fernanda Palacios Martinez - [linkedin-shield](https://twitter.com/twitter_handle) - email@email_client.com 
+Maria Fernanda Palacios Martinez - [linkedin](https://twitter.com/twitter_handle) - email@email_client.com 
+
+## Project Links
 
 Backend Project Link: [https://github.com/Takeoff-Tec/task.ify-backend](https://github.com/Takeoff-Tec/task.ify-backend) 
 
 Frontend Project Link: [https://github.com/Takeoff-Tec/task.ify-frontend](https://github.com/Takeoff-Tec/task.ify-frontend)
+
+Deployed Site Link: https://taskify-frontendhost-2277661894f3.herokuapp.com/
 
 
 
