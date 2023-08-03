@@ -17,6 +17,8 @@ const redisClient = createClient({
     }
 })
 
+;(async () => await redisClient.connect())()
+
 const redisStoreWrapper = new RedisStoreWrapper(redisClient)
 
 const variables: OAuthVariables = {
