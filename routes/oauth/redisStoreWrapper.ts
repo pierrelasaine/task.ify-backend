@@ -1,9 +1,6 @@
-const session = require('express-session')
-const ConnectRedis = require('connect-redis')(session)
+const RedisStore = require("connect-redis").default
 
 type myRedisClient = any
-
-const RedisStore = ConnectRedis(session)
 
 /**
  * Wrapper class for Redis store.
