@@ -55,9 +55,11 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
-Take a Look @ https://taskify-frontendhost-2277661894f3.herokuapp.com/
+The backend of this project is built using Node.js and Express.js, two popular frameworks for building server-side applications in Typescript. It serves as the server-side component responsible for handling incoming requests from clients, processing data, interacting with the database, and sending back appropriate responses.
+The backend serves as the backbone of the application, allowing the frontend and other client applications to communicate with the database and external services seamlessly alongside the security provided by the Spotify OAuthentication. It plays a crucial role in providing a reliable and efficient service to users, managing data, and enabling the main features of the application to function smoothly.
+
+Take a Look @ Task.ify: https://taskify-frontendhost-2277661894f3.herokuapp.com/
 
 ### Built With
 
@@ -125,6 +127,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- ROADMAP -->
 ## Roadmap
 
+- [x] Spotify OAuthentication API
 - [x] OpenAI API Generated Playlist Name and Tracks
 - [x] Creation of Playlist with Tracks inserted in Spotify API
 - [x] Task CRUD operations
