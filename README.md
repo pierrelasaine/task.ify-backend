@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
-    <img src="https://imgur.com/a/daJMhLz" alt="Logo" width="100" height="100">
+    <img src="https://i.imgur.com/rMdsZcE.png" alt="Logo" width="100" height="100">
   </a>
 
   <p align="center">
@@ -169,7 +169,7 @@ Pierre Johnson - [linkedin](https://www.linkedin.com/in/pierrelasaine) - pierrel
 
 Camila Naranjo - [linkedin](https://www.linkedin.com/in/camilavnaranjo) - camilavnaranjoa@gmail.com 
 
-Maria Fernanda Palacios Martinez - [linkedin](https://twitter.com/twitter_handle) - email@email_client.com 
+Maria Fernanda Palacios Martinez - [linkedin](https://www.linkedin.com/in/maria-fernanda-palacios-14998518a?trk=contact-info) - 03fernanda.palacios@gmail.com
 
 ## Project Links
 
