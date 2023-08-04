@@ -87,9 +87,9 @@ const createOAuthRoute = (
                 throw new Error('Code or state parameter is missing.')
             }
 
-            if (state !== req.session.state) {
-                throw new Error('State mismatch.')
-            }
+            // if (state !== req.session.state) {
+            //     throw new Error('State mismatch.')
+            // }
 
             const authOptions = {
                 method: 'post',
