@@ -16,11 +16,9 @@ describe('Playlist Route Handler Tests', () => {
     app.use(express.json());
     app.use('/', playlistRoute);
 
-    // Spy on Sequelize models and mock their methods
     jest.spyOn(User, 'findOne').mockResolvedValue(User.build({ spotify_id: 'mock_spotify_id' }));
     jest.spyOn(Playlist, 'upsert').mockResolvedValue([Playlist.build(), true]);
 
-    // Ensure Sequelize models use the correct mock implementations
     jest.mock('../models/user', () => ({
       User,
     }));

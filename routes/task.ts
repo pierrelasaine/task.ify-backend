@@ -46,8 +46,16 @@ taskRoute.delete("/delete/:id", async (req: Request, res: Response) => {
   try {
     const playlistId = req.params.id;
     const task = await Task.findOne({ where: { playlist_id: playlistId } });
+    const accessToken = req.headers['authorization'];
     if (task) {
       await task.destroy();
+      await axios.delete(
+      `https://api.spotify.com/v1/playlists/${playlistId}/followers`,
+      {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      });
       res.status(204).end();
     } else {
       res.status(404).json({ error: "Task not found" });
