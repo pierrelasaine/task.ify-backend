@@ -199,7 +199,7 @@ describe('OAuth routes', () => {
     //         expect(response.status).toBe(500)
     //         expect(response.body.error).toBe('Failed to logout')
     //     })
-    // })
+    })
 
     describe('GET /session-status', () => {
         // it('should return isAuthenticated=true if cookie contains accessToken', async () => {
