@@ -58,6 +58,8 @@ const createOAuthRoute = (
 
             req.session.state = state
 
+            console.log('||||||||||||||| LOGIN SESSION:', req.session)
+
             res.redirect(
                 'https://accounts.spotify.com/authorize?' +
                     querystring.stringify({
@@ -78,6 +80,8 @@ const createOAuthRoute = (
         try {
             const code = req.query.code as string | null
             const state = req.query.state as string | null
+
+            console.log('||||||||||||||| CALLBACK SESSION:', req.session)
 
             if (!code || !state) {
                 throw new Error('Code or state parameter is missing.')
