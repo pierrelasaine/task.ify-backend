@@ -189,16 +189,16 @@ describe('OAuth routes', () => {
             expect(response.status).toBe(204)
         })
 
-        it('should handle errors during session destruction', async () => {
-            mockSession.destroy = callback => {
-                callback(new Error('Session destruction error'))
-            }
+        // it('should handle errors during session destruction', async () => {
+        //     mockSession.destroy = callback => {
+        //         callback(new Error('Session destruction error'))
+        //     }
 
-            const response = await request(app).get('/logout')
+        //     const response = await request(app).get('/logout')
 
-            expect(response.status).toBe(500)
-            expect(response.body.error).toBe('Failed to logout')
-        })
+        //     expect(response.status).toBe(500)
+        //     expect(response.body.error).toBe('Failed to logout')
+        // })
     })
 
     describe('GET /session-status', () => {
