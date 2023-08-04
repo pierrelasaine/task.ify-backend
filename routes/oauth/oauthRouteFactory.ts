@@ -40,8 +40,8 @@ const createOAuthRoute = (
     const sessionMiddleware = session({
         store: redisStoreWrapper.createStore(),
         secret: client_secret,
-        resave: false,
-        saveUninitialized: false,
+        resave: true,
+        saveUninitialized: true,
         cookie: {
             sameSite: 'none',
             secure: true
