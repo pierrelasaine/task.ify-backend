@@ -153,7 +153,7 @@ const createOAuthRoute = (
                     .status(error.response.status)
                     .json(error.response.data)
             }
-            console.error('Error during callback:', error.message)
+            console.error('Error during callback:', error)
             res.status(500).json({
                 error: 'Failed to handle the OAuth callback'
             })
