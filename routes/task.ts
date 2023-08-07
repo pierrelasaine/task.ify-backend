@@ -7,7 +7,7 @@ const taskRoute = express();
 
 taskRoute.post("/", async (req: Request, res: Response) => {
   try {
-    const accessToken = req.headers['authorization'];
+    const accessToken = req.body.token;
     const spotifyUserInstance = await User.findOne({ where: { access_token: accessToken } });
     if (!spotifyUserInstance) {
       return res
