@@ -16,7 +16,7 @@
   </a>
 
   <p align="center">
-    Task.ify your new Task manager accompanoed by an ai generated playlist based on your task's vibe
+    Task.ify: Streamlining your tasks with AI-curated playlists in a click.
     <br />
 </div>
 
