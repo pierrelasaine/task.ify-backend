@@ -121,42 +121,44 @@ To get a local copy up and running follow these simple example steps.
 
 <div align="center">
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
-    <img src="https://i.imgur.com/xv7Y678.png" alt="Spotify OAuth Screenshot" width="400" height="400">
+    <img src="https://i.imgur.com/xv7Y678.png" alt="Spotify OAuth Screenshot" width="500" height="500">
   </a>
 </div>
 
 <p>Spotify OAuth and Redis Implementation</p>
 <ul style="text-align:left;">
-    <li>Spotify OAuth: Leveraged to authenticate users, this integration gave us direct access to users' Spotify profiles. This allowed us to craft a personalized experience based on users' musical preferences and listening histories.</li>
-    <li>Redis Integration: Incorporated as our choice of in-memory data structure store, Redis was pivotal in caching user session data. This ensured rapid application interactions, drastically reducing latency during recurring data access operations.</li>
+<ul style="text-align:left;">
+    <li><strong>Spotify OAuth:</strong> Leveraged to authenticate users, this integration gave us direct access to users' Spotify profiles. This allowed us to craft a personalized experience based on users' musical preferences and listening histories.</li>
+    <li><strong>Redis Integration:</strong> Incorporated as our choice of in-memory data structure store, Redis was pivotal in caching user session data. This ensured rapid application interactions, drastically reducing latency during recurring data access operations.</li>
 </ul>
+
 
 <div align="center">
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
-    <img src="https://i.imgur.com/HhA1QIS.png" alt="User Model Sequilize Code Screenshot" width="400" height="400">
+    <img src="https://i.imgur.com/HhA1QIS.png" alt="User Model Sequilize Code Screenshot" width="500" height="500">
   </a>
 </div>
 
 <p>Sequilize Implementation</p>
 <ul style="text-align:left;">
-    <li>Object-Relational Mapping (ORM): Tables were effortlessly defined as objects for each model, enabling a clear representation of our database structure.</li>
-    <li>TypeScript Compatibility: Seamless integration with TypeScript ensured that our models were strongly typed, enhancing code reliability and predictability.</li>
-    <li>Relationships Made Easy: Defining the relationships between tables became intuitive, as evident in the associations between the 'User', 'Playlist', and 'Task' models.</li>
-    <li>Simplifying Queries: Gone are the days of lengthy SQL queries. With Sequelize, common tasks are abstracted into straightforward functions, streamlining database operations.</li>
+    <li><strong>Object-Relational Mapping (ORM):</strong> Tables were effortlessly defined as objects for each model, enabling a clear representation of our database structure.</li>
+    <li><strong>TypeScript Compatibility:</strong> Seamless integration with TypeScript ensured that our models were strongly typed, enhancing code reliability and predictability.</li>
+    <li><strong>Relationships Made Easy:</strong> Defining the relationships between tables became intuitive, as evident in the associations between the 'User', 'Playlist', and 'Task' models.</li>
+    <li><strong>Simplifying Queries:</strong> Gone are the days of lengthy SQL queries. With Sequelize, common tasks are abstracted into straightforward functions, streamlining database operations.</li>
 </ul>
+
 <div align="center">
-    <img src="https://i.imgur.com/xFT0mhW.png" alt="Image 1" width="300" height="300" style="margin-right:20px;">
-    <img src="https://i.imgur.com/J2SpgQK.png" alt="Image 2" width="300" height="300">
+    <img src="https://i.imgur.com/xFT0mhW.png" alt="Image 1" width="500" height="500" style="margin-right:20px;">
+    <img src="https://i.imgur.com/J2SpgQK.png" alt="Image 2" width="500" height="500">
 </div>
 
-<p>Spotify Playlist Creation and Track Insertion</p>
+<p>Playlist and Track Creation Process</p>
 <ul style="text-align:left;">
-    <li><strong>Endpoint Creation</strong>: The code showcases an express route (`/callback`) designed to interact with the Spotify API, creating a playlist and then adding tracks to it.</li>
-    <li><strong>User Authentication</strong>: It fetches the Spotify user's details using the provided access token, ensuring the correct user is authenticated before proceeding.</li>
-    <li><strong>Playlist Creation</strong>: A new playlist is created for the authenticated user on Spotify using an API call, which, upon success, returns the newly created playlist's ID.</li>
-    <li><strong>Database Update</strong>: The details of the created playlist, including its name and ID, are then updated or inserted into our database using Sequelize's `upsert` method.</li>
-    <li><strong>Track Insertion</strong>: Another Spotify API call is made to add the provided tracks to the just-created playlist, using the tracks' URIs.</li>
-    <li><strong>Error Handling</strong>: The code contains structured error handling, ensuring any hiccups in the process (like an invalid access token) result in meaningful error messages for debugging.</li>
+    <li><strong>GPT API Response</strong>: The initial response from the GPT API provides crucial information, which includes a suggested playlist name and an array of track details.</li>
+    <li><strong>Extraction Process</strong>: From this GPT API response, we extract the recommended playlist name and the associated array of tracks.</li>
+    <li><strong>Playlist Creation with Spotify API</strong>: Using the extracted playlist name, we make a request to the Spotify API to create a new playlist directly within the user's Spotify account.</li>
+    <li><strong>Mapping Through Tracks</strong>: Post playlist creation, we iterate or map through the provided array of tracks.</li>
+    <li><strong>Track Insertion</strong>: For each track in the array, we utilize the Spotify API again to add (or insert) these tracks into the newly created playlist on the user's Spotify account.</li>
 </ul>
 
 
