@@ -120,7 +120,7 @@ To get a local copy up and running follow these simple example steps.
 ## Usage
 
 <div align="center">
-  <a href="https://github.com/Takeoff-Tec/task.ify-backend">
+  <a href="https://github.com/Takeoff-Tec/task.ify-backend" style="margin-top: 20px;">
     <img src="https://i.imgur.com/xv7Y678.png" alt="Spotify OAuth Screenshot" width="500" height="500">
   </a>
 </div>
@@ -134,7 +134,7 @@ To get a local copy up and running follow these simple example steps.
 
 
 <div align="center">
-  <a href="https://github.com/Takeoff-Tec/task.ify-backend">
+  <a href="https://github.com/Takeoff-Tec/task.ify-backend" style="margin-top: 20px;">
     <img src="https://i.imgur.com/HhA1QIS.png" alt="User Model Sequilize Code Screenshot" width="500" height="500">
   </a>
 </div>
