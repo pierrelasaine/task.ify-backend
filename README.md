@@ -120,7 +120,7 @@ To get a local copy up and running follow these simple example steps.
 
 <div align="center">
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
-    <img src="https://imgur.com/xv7Y678" alt="Spotify OAuth Screenshot" width="400" height="300">
+    <img src="https://i.imgur.com/xv7Y678.png" alt="Spotify OAuth Screenshot" width="400" height="300">
   </a>
   <p>
     SpotifyOAuth where User's can  securely login in to Task.ify
