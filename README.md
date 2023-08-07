@@ -123,25 +123,28 @@ To get a local copy up and running follow these simple example steps.
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
     <img src="https://i.imgur.com/xv7Y678.png" alt="Spotify OAuth Screenshot" width="400" height="400">
   </a>
-  <p>
-    Spotify OAuth and Redis Implementation
-    * Spotify OAuth: Leveraged to authenticate users, this integration gave us direct access to users' Spotify profiles. This allowed us to craft a         
-      personalized experience based on users' musical preferences and listening histories.
-    * Redis Integration: Incorporated as our choice of in-memory data structure store, Redis was pivotal in caching user session data. This ensured rapid 
-      application interactions, drastically reducing latency during recurring data access operations.
-  </p>
+</div>
+
+<p>Spotify OAuth and Redis Implementation</p>
+<ul style="text-align:left;">
+    <li>Spotify OAuth: Leveraged to authenticate users, this integration gave us direct access to users' Spotify profiles. This allowed us to craft a personalized experience based on users' musical preferences and listening histories.</li>
+    <li>Redis Integration: Incorporated as our choice of in-memory data structure store, Redis was pivotal in caching user session data. This ensured rapid application interactions, drastically reducing latency during recurring data access operations.</li>
+</ul>
+
+<div align="center">
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
     <img src="https://i.imgur.com/HhA1QIS.png" alt="User Model Sequilize Code Screenshot" width="400" height="400">
   </a>
-  <p>
-    Sequilize Implementation
-    * Object-Relational Mapping (ORM): Tables were effortlessly defined as objects for each model, enabling a clear representation of our database structure.
-    * TypeScript Compatibility: Seamless integration with TypeScript ensured that our models were strongly typed, enhancing code reliability and predictability.
-    * Relationships Made Easy: Defining the relationships between tables became intuitive, as evident in the associations between the 'User', 'Playlist', and         'Task' models.
-    * Simplifying Queries: Gone are the days of lengthy SQL queries. With Sequelize, common tasks are abstracted into straightforward functions, streamlining         database operations.
-  </p>
-  
 </div>
+
+<p>Sequilize Implementation</p>
+<ul style="text-align:left;">
+    <li>Object-Relational Mapping (ORM): Tables were effortlessly defined as objects for each model, enabling a clear representation of our database structure.</li>
+    <li>TypeScript Compatibility: Seamless integration with TypeScript ensured that our models were strongly typed, enhancing code reliability and predictability.</li>
+    <li>Relationships Made Easy: Defining the relationships between tables became intuitive, as evident in the associations between the 'User', 'Playlist', and 'Task' models.</li>
+    <li>Simplifying Queries: Gone are the days of lengthy SQL queries. With Sequelize, common tasks are abstracted into straightforward functions, streamlining database operations.</li>
+</ul>
+
 
 
 
