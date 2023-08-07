@@ -120,7 +120,7 @@ To get a local copy up and running follow these simple example steps.
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-
+[![Spotify OAuth Screen Shot][Imgur](https://i.imgur.com/xv7Y678.png)
 
 
 <!-- ROADMAP -->
