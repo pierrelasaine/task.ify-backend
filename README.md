@@ -72,6 +72,7 @@ Take a Look @ Task.ify: https://taskify-frontendhost-2277661894f3.herokuapp.com/
 * [![sequelize-mock](https://img.shields.io/badge/sequelize--mock-0.10.2-brightgreen)](https://github.com/BlinkUX/sequelize-mock)
 * [![jest-mock-axios](https://img.shields.io/badge/jest--mock--axios-4.7.2-brightgreen)](https://github.com/knee-cola/jest-mock-axios)
 * [![Axios](https://img.shields.io/badge/Axios-0.21.1-blueviolet)](https://github.com/axios/axios)
+* [![Redis](https://img.shields.io/badge/Redis-3.2-brightgreen)
 * [![nodemon](https://img.shields.io/badge/nodemon-3.0.1-red)](https://nodemon.io/)
 * [![dotenv](https://img.shields.io/badge/dotenv-16.3.1-brightgreen)](https://github.com/motdotla/dotenv)
 * [![cors](https://img.shields.io/badge/cors-2.8.5-brightgreen)](https://github.com/expressjs/cors)
@@ -123,13 +124,21 @@ To get a local copy up and running follow these simple example steps.
     <img src="https://i.imgur.com/xv7Y678.png" alt="Spotify OAuth Screenshot" width="400" height="400">
   </a>
   <p>
-    SpotifyOAuth where User's can  securely login in to Task.ify
+    Spotify OAuth and Redis Implementation
+    * Spotify OAuth: Leveraged to authenticate users, this integration gave us direct access to users' Spotify profiles. This allowed us to craft a         
+      personalized experience based on users' musical preferences and listening histories.
+    * Redis Integration: Incorporated as our choice of in-memory data structure store, Redis was pivotal in caching user session data. This ensured rapid 
+      application interactions, drastically reducing latency during recurring data access operations.
   </p>
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
     <img src="https://i.imgur.com/HhA1QIS.png" alt="User Model Sequilize Code Screenshot" width="400" height="400">
   </a>
   <p>
-    User Model Sequilize
+    Sequilize Implementation
+    * Object-Relational Mapping (ORM): Tables were effortlessly defined as objects for each model, enabling a clear representation of our database structure.
+    * TypeScript Compatibility: Seamless integration with TypeScript ensured that our models were strongly typed, enhancing code reliability and predictability.
+    * Relationships Made Easy: Defining the relationships between tables became intuitive, as evident in the associations between the 'User', 'Playlist', and         'Task' models.
+    * Simplifying Queries: Gone are the days of lengthy SQL queries. With Sequelize, common tasks are abstracted into straightforward functions, streamlining         database operations.
   </p>
   
 </div>
