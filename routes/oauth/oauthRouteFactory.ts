@@ -169,6 +169,7 @@ const createOAuthRoute = (
     oAuthRoute.get('/session-status', (req: Request, res: Response) => {
         try {
             if (req.cookies && req.cookies.accessToken) {
+                console.log('Access token found in cookie')
                 res.json({
                     data: {
                         isAuthenticated: true,
@@ -176,6 +177,7 @@ const createOAuthRoute = (
                     }
                 })
             } else {
+                console.log('Token found in cookie')
                 res.json({ data: { isAuthenticated: false } })
             }
         } catch (error: any) {
