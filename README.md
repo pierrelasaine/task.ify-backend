@@ -120,11 +120,18 @@ To get a local copy up and running follow these simple example steps.
 
 <div align="center">
   <a href="https://github.com/Takeoff-Tec/task.ify-backend">
-    <img src="https://i.imgur.com/xv7Y678.png" alt="Spotify OAuth Screenshot" width="400" height="300">
+    <img src="https://i.imgur.com/xv7Y678.png" alt="Spotify OAuth Screenshot" width="400" height="400">
   </a>
   <p>
     SpotifyOAuth where User's can  securely login in to Task.ify
   </p>
+  <a href="https://github.com/Takeoff-Tec/task.ify-backend">
+    <img src="https://i.imgur.com/HhA1QIS.png" alt="User Model Sequilize Code Screenshot" width="400" height="400">
+  </a>
+  <p>
+    User Model Sequilize
+  </p>
+  
 </div>
 
 
