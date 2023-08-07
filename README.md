@@ -185,7 +185,7 @@ Deployed Site Link: https://taskify-frontendhost-2277661894f3.herokuapp.com/
 ## Acknowledgments
 
 * [A'shuan Thomas](https://github.com/lasagnamassage)
-* [Sammy Au]()
+* [Sammy Au](https://github.com/samau3)
 * [Paige Godfrey](https://github.com/paigegodfrey)
 * Nilesh Patel (Salesforce Mentor)
 * Samuel Paramar (Salesforce Mentor)
