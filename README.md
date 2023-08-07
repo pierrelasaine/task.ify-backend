@@ -118,9 +118,15 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<div align="center">
+  <a href="https://github.com/Takeoff-Tec/task.ify-backend">
+    <img src="https://imgur.com/xv7Y678" alt="Spotify OAuth Screenshot" width="400" height="300">
+  </a>
+  <p>
+    SpotifyOAuth where User's can  securely login in to Task.ify
+  </p>
+</div>
 
-[![Spotify OAuth Screen Shot][Imgur]](https://i.imgur.com/xv7Y678.png)
 
 
 <!-- ROADMAP -->
