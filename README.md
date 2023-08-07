@@ -59,7 +59,7 @@ Take a Look @ Task.ify: https://taskify-frontendhost-2277661894f3.herokuapp.com/
 
 ### Built With
 
-*[![npm](https://img.shields.io/npm/v/task.ifybackend.svg)](https://www.npmjs.com/package/task.ifybackend)
+[![npm](https://img.shields.io/npm/v/task.ifybackend.svg)](https://www.npmjs.com/package/task.ifybackend)
 
 <!-- GETTING STARTED -->
 ## Getting Started
