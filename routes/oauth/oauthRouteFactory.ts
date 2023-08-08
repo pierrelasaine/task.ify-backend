@@ -158,7 +158,9 @@ const createOAuthRoute = (
 
     oAuthRoute.get('/logout', (req: Request, res: Response) => {
         try {
+            console.log('before clearing', res)
             res.clearCookie('accessToken')
+            console.log('after clearing', res)
             res.status(204).send()
         } catch (error: any) {
             console.error('Error during logout:', error.message)
