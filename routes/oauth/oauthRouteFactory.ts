@@ -159,7 +159,7 @@ const createOAuthRoute = (
     oAuthRoute.get('/logout', (req: Request, res: Response) => {
         try {
             console.log('before clearing', req.cookies, '//', res.cookie)
-            res.clearCookie('accessToken', {path: '/', domain: '.taskify-frontendhost-2277661894f3.herokuapp.com'})
+            res.clearCookie('accessToken', {path: '/', domain: '.herokuapp.com'})
             console.log('after clearing', req.cookies, '//', res.cookie)
             res.status(204).send()
         } catch (error: any) {
