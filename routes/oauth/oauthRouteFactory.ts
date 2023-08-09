@@ -54,7 +54,7 @@ const createOAuthRoute = (
         try {
             const state = utils.generateRandomString(16)
             const scope =
-                'user-read-private user-read-email playlist-modify-public playlist-modify-private'
+                'user-read-private user-read-email playlist-modify-public playlist-modify-private user-read-currently-playing user-read-playback-state user-modify-playback-state'
 
             req.session.state = state
 
