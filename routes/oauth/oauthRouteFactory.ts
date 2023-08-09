@@ -54,7 +54,7 @@ const createOAuthRoute = (
         try {
             const state = utils.generateRandomString(16)
             const scope =
-                'user-read-private user-read-email playlist-modify-public playlist-modify-private user-read-currently-playing user-read-playback-state user-modify-playback-state'
+                'user-read-private user-read-email playlist-modify-public playlist-modify-private user-read-currently-playing user-read-playback-state user-modify-playback-state app-remote-control streaming user-read-playback-position user-read-private'
 
             req.session.state = state
 
@@ -159,7 +159,10 @@ const createOAuthRoute = (
     oAuthRoute.get('/logout', (req: Request, res: Response) => {
         try {
             console.log('before clearing', req.cookies, '//', res.cookie)
-            res.clearCookie('accessToken', {path: '/', domain: '.herokuapp.com'})
+            res.clearCookie('accessToken', {
+                path: '/',
+                domain: '.herokuapp.com'
+            })
             console.log('after clearing', req.cookies, '//', res.cookie)
             res.status(204).send()
         } catch (error: any) {
